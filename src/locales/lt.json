@@ -1,0 +1,95 @@
+{
+  "navbar": {
+    "topMenu": {
+      "service": "Servisas",
+      "partsCatalog": "Dalių katalogas",
+      "aboutUs": "Apie mus",
+      "contacts": "Kontaktai",
+      "onlineShop": "El. parduotuvė"
+    },
+    "mainNav": {
+      "electricBikes": "EL. DVIRAČIAI",
+      "road": "KELIAS",
+      "offroad": "BEKELĖ",
+      "water": "VANDUO",
+      "accessories": "PRIEDAI IR AKSESUARAI"
+    }
+  },
+  "hero": {
+    "title": "Yamatecha",
+    "subtitle": "Profesionalūs įrankiai jūsų nuotykiams",
+    "exploreButton": "Tyrinėti produktus"
+  },
+  "motorcycles": {
+    "title": "Motociklų katalogas",
+    "subtitle": "Raskite sau tinkamą motociklą iš mūsų asortimento",
+    "viewMore": "Žiūrėti daugiau"
+  },
+  "exploreYamaha": {
+    "title": "EXPLORE YAMAHA",
+    "promo1": {
+      "title": "Naujausi modeliai",
+      "subtitle": "Atraskite 2026 metų Yamaha naujienas",
+      "button": "Plačiau"
+    },
+    "promo2": {
+      "title": "Specialūs pasiūlymai",
+      "subtitle": "Gaukite geriausias kainas ir sąlygas",
+      "button": "Žiūrėti pasiūlymus"
+    },
+    "categories": {
+      "motorcycles": "Motociklai",
+      "ebikes": "Elektriniai dviračiai",
+      "atvs": "Keturračiai",
+      "snowmobiles": "Sniegpučiai",
+      "boats": "Valtys"
+    }
+  },
+  "footer": {
+    "quickLinks": "Greitos nuorodos",
+    "services": "Paslaugos",
+    "followUs": "Sekite mus",
+    "snow": "SNIEGAS",
+    "copyright": "© 2026 Yamatecha. Visos teisės saugomos."
+  },
+  "language": {
+    "switch": "Keisti kalbą"
+  },
+  "testDrive": {
+    "title": "UŽSISAKYKITE BANDOMĄJĮ VAŽIAVIMĄ",
+    "alt": "Test Drive Motorcycle Collage",
+    "button": "UŽSISAKYK DABAR"
+  },
+  "road": {
+    "title": "KELIAS",
+    "subtitle": "Keliaukite stiliai su Yamaha keliaujančiais motociklais",
+    "categories_title": "Pasirinkite savo kelią",
+    "sport_title": "Sportiniai",
+    "sport_desc": "Maksimali galia ir greitis lenktynių trasoms",
+    "touring_title": "Turistiniai",
+    "touring_desc": "Komfortas ir patikimumas ilgiems kelionėms",
+    "naked_title": "Naked",
+    "naked_desc": "Laisvė ir kontrolė kasdieniam važiavimui",
+    "cruiser_title": "Kruizeriai",
+    "cruiser_desc": "Klasikinis stilius ir atsipalaidavimas kelyje",
+    "view_models": "Žiūrėti modelius",
+    "featured_title": "Populiarūs modeliai",
+    "r1_desc": "Lenktyninis motociklas su MotoGP technologija",
+    "mt07_desc": "Universalus naked motociklas kasdieniam naudojimui",
+    "tracer9_desc": "Sportinis turistinis motociklas visoms sąlygoms",
+    "learn_more": "Sužinoti daugiau",
+    "features_title": "Kodėl pasirinkti Yamaha keliui?",
+    "feature1_title": "Inovatyvūs varikliai",
+    "feature1_desc": "CP3 ir CP4 varikliai su užtikrinamu galios ir kuro efektyvumo balansu",
+    "feature2_title": "Išmanios elektronikos",
+    "feature2_desc": "ABS, traction control, quick shifter ir daugiau saugumui",
+    "feature3_title": "Lengvi rėmai",
+    "feature3_desc": "Aliumininiai ir plieniniai rėmai užtikrinants puikų valdymą",
+    "feature4_title": "Išskirtinis dizainas",
+    "feature4_desc": "Japoniškai estetika ir moderni detalės",
+    "cta_title": "Paruošti keliauti?",
+    "cta_desc": "Apsilankykite mūsų salonuose ir išbandykite Yamaha motociklą",
+    "test_drive": "Test drive",
+    "contact_dealer": "Susisiekti su prekybininku"
+  }
+}

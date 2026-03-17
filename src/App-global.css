@@ -1,0 +1,9 @@
+/* Import shared component styles */
+@import './components/shared-components.css';
+
+/* Global App Styles - Uses variables from index.css */
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+}

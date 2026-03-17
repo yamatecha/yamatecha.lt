@@ -1,0 +1,424 @@
+/* Service Page Specific Styles */
+
+/* Hero Section */
+.servisas .hero-section {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+.servisas .hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.servisas .hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.servisas .hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.8) 0%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+.servisas .hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 1;
+  width: 90%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.servisas .hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+  color: white;
+  letter-spacing: 2px;
+  line-height: 1.2;
+}
+
+.servisas .hero-subtitle {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  opacity: 1;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+  color: white;
+  font-weight: 400;
+  line-height: 1.4;
+  margin-top: 0;
+}
+
+/* Services Overview */
+.servisas .services-overview {
+  padding: 80px 20px;
+  background: #f8f9fa;
+}
+
+.servisas .services-overview .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.servisas .services-overview h2 {
+  font-size: 2.5rem;
+  color: #dc2626;
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: 700;
+}
+
+.servisas .services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.servisas .service-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.servisas .service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border-color: #dc2626;
+}
+
+.servisas .service-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(220, 38, 38, 0.1);
+  border-radius: 50%;
+  border: 2px solid #dc2626;
+}
+
+.servisas .service-icon img {
+  width: 30px;
+  height: 30px;
+  filter: brightness(0) saturate(100%) invert(16%) sepia(78%) saturate(5409%) hue-rotate(353deg) brightness(96%) contrast(119%);
+}
+
+.servisas .service-card h3 {
+  font-size: 1.5rem;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.servisas .service-card p {
+  color: #6b7280;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Service Process */
+.servisas .service-process {
+  padding: 80px 20px;
+  background: white;
+}
+
+.servisas .service-process .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.servisas .service-process h2 {
+  font-size: 2.5rem;
+  color: #1f2937;
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: 700;
+}
+
+.servisas .process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.servisas .step {
+  text-align: center;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.servisas .step:hover {
+  border-color: #dc2626;
+  transform: translateY(-3px);
+}
+
+.servisas .step-number {
+  width: 50px;
+  height: 50px;
+  background: #dc2626;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 auto 1.5rem;
+}
+
+.servisas .step h3 {
+  font-size: 1.3rem;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.servisas .step p {
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* Booking Section */
+.servisas .booking-section {
+  padding: 80px 20px;
+  background: #f8f9fa;
+}
+
+.servisas .booking-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.servisas .booking-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.servisas .booking-text h2 {
+  font-size: 2.5rem;
+  color: #dc2626;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.servisas .booking-text p {
+  font-size: 1.1rem;
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.servisas .booking-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.servisas .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.servisas .form-group label {
+  display: block;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.servisas .form-group input,
+.servisas .form-group select,
+.servisas .form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  font-family: "Play", sans-serif;
+}
+
+.servisas .form-group input:focus,
+.servisas .form-group select:focus,
+.servisas .form-group textarea:focus {
+  outline: none;
+  border-color: #dc2626;
+}
+
+.servisas .form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.servisas .submit-btn {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.servisas .submit-btn:hover {
+  background: #b91c1c;
+  transform: translateY(-2px);
+}
+
+/* Contact Info */
+.servisas .contact-info {
+  padding: 80px 20px;
+  background: white;
+}
+
+.servisas .contact-info .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.servisas .contact-info h2 {
+  font-size: 2.5rem;
+  color: #1f2937;
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: 700;
+}
+
+.servisas .contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.servisas .contact-item {
+  background: #f8f9fa;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  min-height: auto;
+  overflow: hidden;
+}
+
+.servisas .contact-item:hover {
+  border-color: #dc2626;
+  transform: translateY(-3px);
+}
+
+.servisas .contact-item h3 {
+  font-size: 1.2rem;
+  color: #dc2626;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.servisas .contact-item p {
+  color: #6b7280;
+  line-height: 1.6;
+  font-size: 1rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .servisas .hero-section {
+    height: 50vh;
+    min-height: 300px;
+  }
+  
+  .servisas .services-overview,
+  .servisas .service-process,
+  .servisas .booking-section,
+  .servisas .contact-info {
+    padding: 60px 15px;
+  }
+  
+  .servisas .services-grid,
+  .servisas .process-steps,
+  .servisas .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .servisas .booking-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .servisas .services-overview h2,
+  .servisas .service-process h2,
+  .servisas .booking-text h2,
+  .servisas .contact-info h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .servisas .hero-section {
+    height: 40vh;
+    min-height: 250px;
+  }
+  
+  .servisas .services-overview,
+  .servisas .service-process,
+  .servisas .booking-section,
+  .servisas .contact-info {
+    padding: 40px 15px;
+  }
+  
+  .servisas .service-card,
+  .servisas .step,
+  .servisas .booking-form,
+  .servisas .contact-item {
+    padding: 1.5rem;
+  }
+  
+  .servisas .services-overview h2,
+  .servisas .service-process h2,
+  .servisas .booking-text h2,
+  .servisas .contact-info h2 {
+    font-size: 1.8rem;
+  }
+  
+  .servisas .service-card h3,
+  .servisas .step h3 {
+    font-size: 1.3rem;
+  }
+}

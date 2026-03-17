@@ -1,0 +1,452 @@
+/* Electric Bikes Page Styles */
+
+/* Hero Section */
+.el-dviraciai .hero-section {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+.el-dviraciai .hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.el-dviraciai .hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.el-dviraciai .hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.8) 0%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+.el-dviraciai .hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 1;
+  width: 90%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.el-dviraciai .hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+  color: white;
+  letter-spacing: 2px;
+  line-height: 1.2;
+}
+
+.el-dviraciai .hero-subtitle {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  opacity: 1;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+  color: white;
+  font-weight: 400;
+  line-height: 1.4;
+  margin-top: 0;
+}
+
+/* Categories Section */
+.el-dviraciai .categories-section {
+  padding: 80px 20px;
+  background: white;
+}
+
+.el-dviraciai .categories-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #1f2937;
+  text-align: center;
+}
+
+.el-dviraciai .categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.el-dviraciai .category-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.el-dviraciai .category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-color: #22c55e;
+}
+
+.el-dviraciai .category-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.el-dviraciai .category-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #1f2937;
+}
+
+.el-dviraciai .category-card p {
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* Featured Models Section */
+.el-dviraciai .featured-models {
+  padding: 80px 20px;
+  background: #f8fafc;
+}
+
+.el-dviraciai .featured-models h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #1f2937;
+  text-align: center;
+}
+
+.el-dviraciai .models-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.el-dviraciai .model-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.el-dviraciai .model-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.el-dviraciai .model-image {
+  width: 100%;
+  height: 200px;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.el-dviraciai .model-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.el-dviraciai .model-info {
+  padding: 1.5rem;
+}
+
+.el-dviraciai .model-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+.el-dviraciai .model-type {
+  color: #22c55e;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.el-dviraciai .price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #22c55e;
+  margin-bottom: 1rem;
+}
+
+.el-dviraciai .features {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.el-dviraciai .features li {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.el-dviraciai .view-details {
+  width: 100%;
+  padding: 12px;
+  background: #22c55e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.el-dviraciai .view-details:hover {
+  background: #16a34a;
+}
+
+/* Technology Section */
+.el-dviraciai .technology-section {
+  padding: 80px 20px;
+  background: white;
+}
+
+.el-dviraciai .technology-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #1f2937;
+  text-align: center;
+}
+
+.el-dviraciai .tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.el-dviraciai .tech-card {
+  text-align: center;
+  padding: 2rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.el-dviraciai .tech-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.el-dviraciai .tech-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.el-dviraciai .tech-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #1f2937;
+}
+
+.el-dviraciai .tech-card p {
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* Test Drive Section */
+.el-dviraciai .test-drive-section {
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: white;
+  text-align: center;
+}
+
+.el-dviraciai .test-drive-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.el-dviraciai .test-drive-section p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.el-dviraciai .test-drive-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.el-dviraciai .form-input {
+  padding: 15px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.el-dviraciai .form-input:focus {
+  outline: none;
+  background: white;
+}
+
+.el-dviraciai .submit-button {
+  padding: 15px 30px;
+  background: white;
+  color: #22c55e;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.el-dviraciai .submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Contact Section */
+.el-dviraciai .contact-section {
+  padding: 80px 20px;
+  background: #f8fafc;
+  text-align: center;
+}
+
+.el-dviraciai .contact-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #1f2937;
+}
+
+.el-dviraciai .contact-section p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #6b7280;
+}
+
+.el-dviraciai .contact-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.el-dviraciai .contact-button {
+  padding: 15px 30px;
+  background: #22c55e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.el-dviraciai .contact-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .el-dviraciai .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .el-dviraciai .hero-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .el-dviraciai .categories-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .el-dviraciai .models-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .el-dviraciai .tech-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .el-dviraciai .test-drive-form {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .el-dviraciai .contact-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .el-dviraciai .contact-button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .el-dviraciai .hero-title {
+    font-size: 2rem;
+  }
+
+  .el-dviraciai .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .el-dviraciai .categories-section h2,
+  .el-dviraciai .featured-models h2,
+  .el-dviraciai .technology-section h2,
+  .el-dviraciai .test-drive-section h2,
+  .el-dviraciai .contact-section h2 {
+    font-size: 2rem;
+  }
+
+  .el-dviraciai .categories-section,
+  .el-dviraciai .featured-models,
+  .el-dviraciai .technology-section,
+  .el-dviraciai .test-drive-section,
+  .el-dviraciai .contact-section {
+    padding: 60px 20px;
+  }
+
+  .el-dviraciai .categories-grid,
+  .el-dviraciai .models-grid,
+  .el-dviraciai .tech-grid {
+    grid-template-columns: 1fr;
+  }
+}

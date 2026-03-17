@@ -1,0 +1,38 @@
+{
+  "navbar": {
+    "topMenu": {
+      "service": "Сервис",
+      "partsCatalog": "Каталог запчастей",
+      "aboutUs": "О нас",
+      "contacts": "Контакты",
+      "onlineShop": "Интернет-магазин"
+    },
+    "mainNav": {
+      "electricBikes": "ЭЛЕКТРОВЕЛОСИПЕДЫ",
+      "road": "ДОРОГА",
+      "offroad": "БЕЗДОРОЖЬЕ",
+      "water": "ВОДА",
+      "accessories": "ПРИНАДЛЕЖНОСТИ И АКСЕССУАРЫ"
+    }
+  },
+  "hero": {
+    "title": "Yamatecha",
+    "subtitle": "Профессиональное оборудование для ваших приключений",
+    "exploreButton": "Исследовать продукты"
+  },
+  "language": {
+    "switch": "Сменить язык"
+  },
+  "footer": {
+    "quickLinks": "Быстрые ссылки",
+    "services": "Услуги",
+    "followUs": "Следите за нами",
+    "snow": "СНЕГ",
+    "copyright": "© 2026 Yamatecha. Все права защищены."
+  },
+  "testDrive": {
+    "title": "ЗАБРОНИРУЙТЕ ТЕСТ-ДРАЙВ",
+    "alt": "Test Drive Motorcycle Collage",
+    "button": "ЗАБРОНИРОВАТЬ"
+  }
+}

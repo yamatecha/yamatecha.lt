@@ -1,0 +1,38 @@
+{
+  "navbar": {
+    "topMenu": {
+      "service": "Service",
+      "partsCatalog": "Parts Catalog",
+      "aboutUs": "About Us",
+      "contacts": "Contacts",
+      "onlineShop": "Online Shop"
+    },
+    "mainNav": {
+      "electricBikes": "E-BIKES",
+      "road": "ROAD",
+      "offroad": "OFFROAD",
+      "water": "WATER",
+      "accessories": "ACCESSORIES"
+    }
+  },
+  "hero": {
+    "title": "Yamatecha",
+    "subtitle": "Professional equipment for your adventures",
+    "exploreButton": "Explore Products"
+  },
+  "language": {
+    "switch": "Switch Language"
+  },
+  "footer": {
+    "quickLinks": "Quick Links",
+    "services": "Services",
+    "followUs": "Follow Us",
+    "snow": "SNOW",
+    "copyright": "© 2026 Yamatecha. All rights reserved."
+  },
+  "testDrive": {
+    "title": "BOOK A TEST DRIVE",
+    "alt": "Test Drive Motorcycle Collage",
+    "button": "BOOK NOW"
+  }
+}

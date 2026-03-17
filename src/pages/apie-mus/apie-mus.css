@@ -1,0 +1,253 @@
+/* About Us Page Specific Styles */
+
+/* Hero Section */
+.apie-mus .hero-section {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+.apie-mus .hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.apie-mus .hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.apie-mus .hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.8) 0%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+.apie-mus .hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 1;
+  width: 90%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.apie-mus .hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+  color: white;
+  letter-spacing: 2px;
+  line-height: 1.2;
+}
+
+.apie-mus .hero-subtitle {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  opacity: 1;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+  color: white;
+  font-weight: 400;
+  line-height: 1.4;
+  margin-top: 0;
+}
+
+/* About Content */
+.apie-mus .about-content {
+  padding: 80px 20px;
+  background: #f8f9fa;
+}
+
+.apie-mus .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.apie-mus .about-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.apie-mus .about-text h2 {
+  font-size: 2.5rem;
+  color: #dc2626;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.apie-mus .about-text p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #4b5563;
+  margin-bottom: 2rem;
+}
+
+.apie-mus .about-text h3 {
+  font-size: 1.8rem;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.apie-mus .values-list {
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.apie-mus .values-list li {
+  font-size: 1.1rem;
+  color: #4b5563;
+  margin-bottom: 0.8rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.apie-mus .values-list li::before {
+  content: "•";
+  color: #dc2626;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+.apie-mus .about-stats {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.apie-mus .stat-item {
+  margin-bottom: 2rem;
+}
+
+.apie-mus .stat-item:last-child {
+  margin-bottom: 0;
+}
+
+.apie-mus .stat-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #dc2626;
+  margin-bottom: 0.5rem;
+}
+
+.apie-mus .stat-label {
+  font-size: 1rem;
+  color: #6b7280;
+}
+
+/* Navigation Links */
+.apie-mus .navigation-links {
+  padding: 80px 20px;
+  background: white;
+}
+
+.apie-mus .navigation-links h2 {
+  font-size: 2.5rem;
+  color: #1f2937;
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: 700;
+}
+
+.apie-mus .links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.apie-mus .link-card {
+  background: #f8f9fa;
+  padding: 2rem;
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.apie-mus .link-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-color: #dc2626;
+}
+
+.apie-mus .link-card h3 {
+  font-size: 1.3rem;
+  color: #dc2626;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.apie-mus .link-card p {
+  color: #6b7280;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .apie-mus .about-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .apie-mus .about-stats {
+    order: -1;
+  }
+  
+  .apie-mus .hero-content {
+    padding: 0 15px;
+  }
+  
+  .apie-mus .about-content,
+  .apie-mus .navigation-links {
+    padding: 60px 15px;
+  }
+  
+  .apie-mus .links-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .apie-mus .hero-section {
+    height: 50vh;
+    min-height: 300px;
+  }
+  
+  .apie-mus .about-text h2,
+  .apie-mus .navigation-links h2 {
+    font-size: 2rem;
+  }
+  
+  .apie-mus .about-text h3 {
+    font-size: 1.5rem;
+  }
+  
+  .apie-mus .stat-number {
+    font-size: 2rem;
+  }
+}
