@@ -13,7 +13,8 @@
 .hero-section {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 115px); /* Full viewport height minus fixed header */
+  margin-top: 115px; /* Position below fixed header */
   overflow: hidden;
 }
 
@@ -222,6 +223,11 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .hero-section {
+    height: calc(100vh - 145px); /* Viewport height minus mobile fixed header */
+    margin-top: 145px; /* Position below mobile fixed header */
+  }
+  
   .hero-content {
     bottom: 40px;
     left: 20px;
@@ -247,6 +253,11 @@
 }
 
 @media (max-width: 480px) {
+  .hero-section {
+    height: calc(100vh - 135px); /* Viewport height minus small mobile fixed header */
+    margin-top: 135px; /* Position below small mobile fixed header */
+  }
+  
   .hero-content {
     bottom: 30px;
     left: 15px;

@@ -1,21 +1,61 @@
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import ProductCard from '../../components/shop/ProductCard'
+import { shopifyAPI, type Product } from '../../lib/shopify'
 import './el-dviraciai.css'
 
 const ElDviraciai = () => {
   const { t } = useTranslation()
+  const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true)
+      setError(null)
+
+      try {
+        const { data, errors } = await shopifyAPI.getProducts({
+          first: 12,
+          query: 'product_type:"Electric Bike"',
+        })
+
+        if (errors?.length) {
+          setError('Failed to load products')
+        } else {
+          setProducts(data?.nodes || [])
+        }
+      } catch {
+        setError('Failed to load products')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProducts()
+  }, [])
 
   return (
     <div className="el-dviraciai">
       <main className="main-content">
         {/* Hero Section */}
         <section className="hero-section">
-          <div className="hero-background">
-            <img src="/src/assets/hero.png" alt="Yamaha Electric Bikes" className="hero-image" />
+          <div className="hero-video-background">
+            <video 
+              src="/src/assets/video/Yamaha Bicycles YDX-MORO 07 Introduction.webm" 
+              autoPlay 
+              muted 
+              loop 
+              playsInline
+              className="hero-video" 
+            />
             <div className="hero-overlay"></div>
           </div>
           <div className="hero-content">
-            <h1 className="hero-title">{t('electric_bikes.title', 'ELEKTRINIAI DVIRAČIAI')}</h1>
-            <p className="hero-subtitle">{t('electric_bikes.subtitle', 'Inovatyvūs Yamaha elektriniai dviračiai jūsų judrumui')}</p>
+            <h1><span style={{ color: '#dc2626' }}>{t('electric_bikes.title', 'ELEKTRINIAI DVIRAČIAI')}</span></h1>
+            <p>{t('electric_bikes.subtitle', 'Inovatyvūs Yamaha elektriniai dviračiai jūsų judrumui')}</p>
+            <button className="cta-button">{t('hero.exploreButton', 'Tyrinėti produktus')}</button>
           </div>
         </section>
 
@@ -52,72 +92,19 @@ const ElDviraciai = () => {
         <section className="featured-models">
           <div className="container">
             <h2>{t('electric_bikes.featured_title', 'Populiariausi modeliai')}</h2>
-            <div className="models-grid">
-              <div className="model-card">
-                <div className="model-image">
-                  <img src="/src/assets/bike-placeholder.jpg" alt="Yamaha CrossCore RC" />
-                </div>
-                <div className="model-info">
-                  <h3>Yamaha CrossCore RC</h3>
-                  <p className="model-type">{t('electric_bikes.urban', 'Miesto')}</p>
-                  <p className="price">€2,499</p>
-                  <ul className="features">
-                    <li>{t('electric_bikes.range', 'Veikimo nuotolis')}: 120km</li>
-                    <li>{t('electric_bikes.motor', 'Variklis')}: PWseries3</li>
-                    <li>{t('electric_bikes.battery', 'Baterija')}: 500Wh</li>
-                  </ul>
-                  <button className="view-details">{t('electric_bikes.view_details', 'Plačiau')}</button>
-                </div>
+            {loading && (
+              <div style={{ padding: '24px 0' }}>{t('shop.loading', 'Loading products...')}</div>
+            )}
+            {error && (
+              <div style={{ padding: '24px 0' }}>{error}</div>
+            )}
+            {!loading && !error && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {products.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
               </div>
-              <div className="model-card">
-                <div className="model-image">
-                  <img src="/src/assets/bike-placeholder.jpg" alt="Yamaha YDX-Moro" />
-                </div>
-                <div className="model-info">
-                  <h3>Yamaha YDX-Moro</h3>
-                  <p className="model-type">{t('electric_bikes.mountain', 'Kalnų')}</p>
-                  <p className="price">€3,799</p>
-                  <ul className="features">
-                    <li>{t('electric_bikes.range', 'Veikimo nuotolis')}: 150km</li>
-                    <li>{t('electric_bikes.motor', 'Variklis')}: PW-X3</li>
-                    <li>{t('electric_bikes.battery', 'Baterija')}: 600Wh</li>
-                  </ul>
-                  <button className="view-details">{t('electric_bikes.view_details', 'Plačiau')}</button>
-                </div>
-              </div>
-              <div className="model-card">
-                <div className="model-image">
-                  <img src="/src/assets/bike-placeholder.jpg" alt="Yamaha CrossConnect" />
-                </div>
-                <div className="model-info">
-                  <h3>Yamaha CrossConnect</h3>
-                  <p className="model-type">{t('electric_bikes.trekking', 'Trekingo')}</p>
-                  <p className="price">€2,899</p>
-                  <ul className="features">
-                    <li>{t('electric_bikes.range', 'Veikimo nuotolis')}: 140km</li>
-                    <li>{t('electric_bikes.motor', 'Variklis')}: PWseries3</li>
-                    <li>{t('electric_bikes.battery', 'Baterija')}: 500Wh</li>
-                  </ul>
-                  <button className="view-details">{t('electric_bikes.view_details', 'Plačiau')}</button>
-                </div>
-              </div>
-              <div className="model-card">
-                <div className="model-image">
-                  <img src="/src/assets/bike-placeholder.jpg" alt="Yamaha YDX-Toro" />
-                </div>
-                <div className="model-info">
-                  <h3>Yamaha YDX-Toro</h3>
-                  <p className="model-type">{t('electric_bikes.mountain', 'Kalnų')}</p>
-                  <p className="price">€4,299</p>
-                  <ul className="features">
-                    <li>{t('electric_bikes.range', 'Veikimo nuotolis')}: 160km</li>
-                    <li>{t('electric_bikes.motor', 'Variklis')}: PW-X3</li>
-                    <li>{t('electric_bikes.battery', 'Baterija')}: 800Wh</li>
-                  </ul>
-                  <button className="view-details">{t('electric_bikes.view_details', 'Plačiau')}</button>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </section>
 

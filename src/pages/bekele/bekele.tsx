@@ -1,5 +1,8 @@
 import { useTranslation } from 'react-i18next'
+import LazyVideo from '../../components/LazyVideo'
 import './bekele.css'
+
+import tenereVideo from '../../assets/video/2026 Yamaha Ténéré 700 World Raid： Adventure has no limits.webm'
 
 const Bekele = () => {
   const { t } = useTranslation()
@@ -9,13 +12,22 @@ const Bekele = () => {
       <main className="main-content">
         {/* Hero Section */}
         <section className="hero-section">
-          <div className="hero-background">
-            <img src="/src/assets/hero-offroad.png" alt="Yamaha Off-Road Motorcycles" className="hero-image" />
+          <div className="hero-video-background">
+            <LazyVideo
+              src={tenereVideo}
+              type="video/webm"
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="hero-video"
+            />
             <div className="hero-overlay"></div>
           </div>
           <div className="hero-content">
-            <h1 className="hero-title">{t('offroad.title', 'BEKELĖ')}</h1>
-            <p className="hero-subtitle">{t('offroad.subtitle', 'Nugalėkite bet kokią trasą su Yamaha bekelės motociklais')}</p>
+            <h1><span style={{ color: '#dc2626' }}>{t('offroad.title', 'BEKELĖ')}</span></h1>
+            <p>{t('offroad.subtitle', 'Nugalėkite bet kokią trasą su Yamaha bekelės motociklais')}</p>
+            <button className="cta-button">{t('hero.exploreButton', 'Tyrinėti produktus')}</button>
           </div>
         </section>
 

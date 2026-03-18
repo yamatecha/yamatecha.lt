@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import LazyVideo from './LazyVideo';
-import yamahaVideo from '../assets/video/2026 Yamaha Tricity 300_ Make the right move.mp4';
+import yamahaVideo from '../assets/video/2026 Yamaha Tricity 300： Make the right move.webm';
 
 const Hero = () => {
   const { t } = useTranslation();

@@ -14,8 +14,9 @@ const Servisas = () => {
             <div className="hero-overlay"></div>
           </div>
           <div className="hero-content">
-            <h1 className="hero-title">{t('service.title', 'SERVISAS')}</h1>
-            <p className="hero-subtitle">{t('service.subtitle', 'Profesionalus Yamaha technikos servisas ir priežiūra')}</p>
+            <h1><span style={{ color: '#dc2626' }}>{t('service.title', 'SERVISAS')}</span></h1>
+            <p>{t('service.subtitle', 'Profesionalus Yamaha technikos servisas ir priežiūra')}</p>
+            <button className="cta-button">{t('hero.exploreButton', 'Tyrinėti produktus')}</button>
           </div>
         </section>
 

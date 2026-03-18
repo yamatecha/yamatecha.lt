@@ -1,21 +1,54 @@
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import ProductCard from '../../components/shop/ProductCard'
+import { shopifyAPI, type Product } from '../../lib/shopify'
 import './priedai-aksesuarai.css'
 
 const PriedaiAksesuarai = () => {
   const { t } = useTranslation()
+  const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true)
+      setError(null)
+
+      try {
+        const { data, errors } = await shopifyAPI.getProducts({
+          first: 12,
+          query: 'product_type:Accessories',
+        })
+
+        if (errors?.length) {
+          setError('Failed to load products')
+        } else {
+          setProducts(data?.nodes || [])
+        }
+      } catch {
+        setError('Failed to load products')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProducts()
+  }, [])
 
   return (
     <div className="priedai-aksesuarai">
       <main className="main-content">
         {/* Hero Section */}
         <section className="hero-section">
-          <div className="hero-background">
-            <img src="/src/assets/hero-accessories.jpg" alt="Yamaha Accessories" className="hero-image" />
+          <div className="hero-video-background">
+            <img src="/src/assets/hero-accessories.jpg" alt="Yamaha Accessories" className="hero-video" />
             <div className="hero-overlay"></div>
           </div>
           <div className="hero-content">
-            <h1 className="hero-title">{t('accessories.title', 'PRIEDAI IR AKSESUARAI')}</h1>
-            <p className="hero-subtitle">{t('accessories.subtitle', 'Papildykite savo Yamaha motociklą aukštos kokybės priedais ir aksesuarais')}</p>
+            <h1><span style={{ color: '#dc2626' }}>{t('accessories.title', 'PRIEDAI IR AKSESUARAI')}</span></h1>
+            <p>{t('accessories.subtitle', 'Papildykite savo Yamaha motociklą aukštos kokybės priedais ir aksesuarais')}</p>
+            <button className="cta-button">{t('hero.exploreButton', 'Tyrinėti produktus')}</button>
           </div>
         </section>
 
@@ -83,49 +116,19 @@ const PriedaiAksesuarai = () => {
         <section className="featured-products">
           <div className="container">
             <h2>{t('accessories.featured_title', 'Populiarūs produktai')}</h2>
-            <div className="products-grid">
-              <div className="product-card">
-                <div className="product-image">
-                  <img src="/src/assets/products/yamaha-helmet.jpg" alt="Yamaha Helmet" />
-                </div>
-                <div className="product-info">
-                  <h3>Yamaha YZF-R1 Šalmas</h3>
-                  <p>{t('accessories.helmet_desc', 'Profesionalus lenktyninis šalmas su Yamaha dizainu')}</p>
-                  <div className="product-price">
-                    <span className="price">€299</span>
-                  </div>
-                  <button className="product-btn">{t('accessories.add_to_cart', 'Į krepšelį')}</button>
-                </div>
+            {loading && (
+              <div style={{ padding: '24px 0' }}>{t('shop.loading', 'Loading products...')}</div>
+            )}
+            {error && (
+              <div style={{ padding: '24px 0' }}>{error}</div>
+            )}
+            {!loading && !error && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {products.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
               </div>
-              
-              <div className="product-card">
-                <div className="product-image">
-                  <img src="/src/assets/products/exhaust-system.jpg" alt="Exhaust System" />
-                </div>
-                <div className="product-info">
-                  <h3>Yamaha Akrapovič Išmetimo Sistema</h3>
-                  <p>{t('accessories.exhaust_desc', 'Sportiška išmetimo sistema padidintam galingumui')}</p>
-                  <div className="product-price">
-                    <span className="price">€1,299</span>
-                  </div>
-                  <button className="product-btn">{t('accessories.add_to_cart', 'Į krepšelį')}</button>
-                </div>
-              </div>
-              
-              <div className="product-card">
-                <div className="product-image">
-                  <img src="/src/assets/products/side-bags.jpg" alt="Side Bags" />
-                </div>
-                <div className="product-info">
-                  <h3>Yamaha Šoniniai Krepšiai</h3>
-                  <p>{t('accessories.bags_desc', 'Tvirti ir vandeniui atspari šoniniai krepšiai')}</p>
-                  <div className="product-price">
-                    <span className="price">€449</span>
-                  </div>
-                  <button className="product-btn">{t('accessories.add_to_cart', 'Į krepšelį')}</button>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </section>
 

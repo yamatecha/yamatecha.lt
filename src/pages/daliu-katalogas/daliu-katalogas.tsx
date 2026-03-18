@@ -1,8 +1,47 @@
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import ProductCard from '../../components/shop/ProductCard'
+import { shopifyAPI, type Product } from '../../lib/shopify'
 import './daliu-katalogas.css'
 
 const DaliuKatalogas = () => {
   const { t } = useTranslation()
+  const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [searchInput, setSearchInput] = useState('')
+  const [searchTerm, setSearchTerm] = useState('')
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true)
+      setError(null)
+
+      try {
+        let query = 'product_type:Parts'
+        if (searchTerm) {
+          query += ` AND title:*${searchTerm}*`
+        }
+
+        const { data, errors } = await shopifyAPI.getProducts({
+          first: 12,
+          query,
+        })
+
+        if (errors?.length) {
+          setError('Failed to load products')
+        } else {
+          setProducts(data?.nodes || [])
+        }
+      } catch {
+        setError('Failed to load products')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProducts()
+  }, [searchTerm])
 
   return (
     <div className="daliu-katalogas">
@@ -14,8 +53,9 @@ const DaliuKatalogas = () => {
             <div className="hero-overlay"></div>
           </div>
           <div className="hero-content">
-            <h1 className="hero-title">{t('parts_catalog.title', 'DALIŲ KATALOGAS')}</h1>
-            <p className="hero-subtitle">{t('parts_catalog.subtitle', 'Originalūs Yamaha dalys jūsų technikai')}</p>
+            <h1><span style={{ color: '#dc2626' }}>{t('parts_catalog.title', 'DALIŲ KATALOGAS')}</span></h1>
+            <p>{t('parts_catalog.subtitle', 'Originalūs Yamaha dalys jūsų technikai')}</p>
+            <button className="cta-button">{t('hero.exploreButton', 'Tyrinėti produktus')}</button>
           </div>
         </section>
 
@@ -28,8 +68,10 @@ const DaliuKatalogas = () => {
                 type="text" 
                 placeholder={t('parts_catalog.search_placeholder', 'Įveskite dalies kodą arba pavadinimą')}
                 className="search-input"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
               />
-              <button className="search-button">
+              <button className="search-button" onClick={() => setSearchTerm(searchInput)}>
                 {t('parts_catalog.search_button', 'Ieškoti')}
               </button>
             </div>
@@ -79,52 +121,19 @@ const DaliuKatalogas = () => {
         <section className="featured-products">
           <div className="container">
             <h2>{t('parts_catalog.featured_title', 'Populiarios dalys')}</h2>
-            <div className="products-grid">
-              <div className="product-card">
-                <div className="product-image">
-                  <img src="/src/assets/part-placeholder.jpg" alt="Oil Filter" />
-                </div>
-                <div className="product-info">
-                  <h3>{t('parts_catalog.oil_filter', 'Alyvos filtras')}</h3>
-                  <p className="part-number">5GH-13440-00</p>
-                  <p className="price">€15.99</p>
-                  <button className="add-to-cart">{t('parts_catalog.add_to_cart', 'Į krepšelį')}</button>
-                </div>
+            {loading && (
+              <div style={{ padding: '24px 0' }}>{t('shop.loading', 'Loading products...')}</div>
+            )}
+            {error && (
+              <div style={{ padding: '24px 0' }}>{error}</div>
+            )}
+            {!loading && !error && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {products.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
               </div>
-              <div className="product-card">
-                <div className="product-image">
-                  <img src="/src/assets/part-placeholder.jpg" alt="Air Filter" />
-                </div>
-                <div className="product-info">
-                  <h3>{t('parts_catalog.air_filter', 'Oro filtras')}</h3>
-                  <p className="part-number">4GV-14440-00</p>
-                  <p className="price">€22.50</p>
-                  <button className="add-to-cart">{t('parts_catalog.add_to_cart', 'Į krepšelį')}</button>
-                </div>
-              </div>
-              <div className="product-card">
-                <div className="product-image">
-                  <img src="/src/assets/part-placeholder.jpg" alt="Brake Pads" />
-                </div>
-                <div className="product-info">
-                  <h3>{t('parts_catalog.brake_pads', 'Stabdžių kaladėlės')}</h3>
-                  <p className="part-number">2VY-2580U-00</p>
-                  <p className="price">€35.99</p>
-                  <button className="add-to-cart">{t('parts_catalog.add_to_cart', 'Į krepšelį')}</button>
-                </div>
-              </div>
-              <div className="product-card">
-                <div className="product-image">
-                  <img src="/src/assets/part-placeholder.jpg" alt="Spark Plug" />
-                </div>
-                <div className="product-info">
-                  <h3>{t('parts_catalog.spark_plug', 'Žvakė')}</h3>
-                  <p className="part-number">LMAR8E-9</p>
-                  <p className="price">€8.99</p>
-                  <button className="add-to-cart">{t('parts_catalog.add_to_cart', 'Į krepšelį')}</button>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </section>
 

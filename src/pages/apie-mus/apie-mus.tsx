@@ -9,13 +9,14 @@ const ApieMus = () => {
       <main className="main-content">
         {/* Hero Section */}
         <section className="hero-section">
-          <div className="hero-background">
-            <img src="/src/assets/hero.png" alt="Yamaha Motorcycle" className="hero-image" />
+          <div className="hero-video-background">
+            <img src="/src/assets/hero.png" alt="Yamaha Motorcycle" className="hero-video" />
             <div className="hero-overlay"></div>
           </div>
           <div className="hero-content">
-            <h1 className="hero-title">{t('about_us.title', 'APIE MUS')}</h1>
-            <p className="hero-subtitle">{t('about_us.subtitle', 'Jau daugiau nei dešimtmetį auginome Yamaha kultūrą Lietuvoje')}</p>
+            <h1><span style={{ color: '#dc2626' }}>{t('about_us.title', 'APIE MUS')}</span></h1>
+            <p>{t('about_us.subtitle', 'Jau daugiau nei dešimtmetį auginome Yamaha kultūrą Lietuvoje')}</p>
+            <button className="cta-button">{t('hero.exploreButton', 'Tyrinėti produktus')}</button>
           </div>
         </section>
 

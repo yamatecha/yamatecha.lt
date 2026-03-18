@@ -1,21 +1,54 @@
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import ProductCard from '../../components/shop/ProductCard'
+import { shopifyAPI, type Product } from '../../lib/shopify'
 import './vanduo.css'
 
 const Vanduo = () => {
   const { t } = useTranslation()
+  const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true)
+      setError(null)
+
+      try {
+        const { data, errors } = await shopifyAPI.getProducts({
+          first: 12,
+          query: 'product_type:Watercraft',
+        })
+
+        if (errors?.length) {
+          setError('Failed to load products')
+        } else {
+          setProducts(data?.nodes || [])
+        }
+      } catch {
+        setError('Failed to load products')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProducts()
+  }, [])
 
   return (
     <div className="vanduo">
       <main className="main-content">
         {/* Hero Section */}
         <section className="hero-section">
-          <div className="hero-background">
-            <img src="/src/assets/hero-watercraft.jpg" alt="Yamaha Watercraft" className="hero-image" />
+          <div className="hero-video-background">
+            <img src="/src/assets/hero-watercraft.jpg" alt="Yamaha Watercraft" className="hero-video" />
             <div className="hero-overlay"></div>
           </div>
           <div className="hero-content">
-            <h1 className="hero-title play-bold">{t('watercraft.title', 'VANDENS TRANSPORTAS')}</h1>
-            <p className="hero-subtitle play-regular">{t('watercraft.subtitle', 'Patirkti laisvę vandenyje su Yamaha vandens transporto priemonėmis')}</p>
+            <h1 className="hero-title">{t('watercraft.title', 'VANDENS TRANSPORTAS')}</h1>
+            <p>{t('watercraft.subtitle', 'Patirkti laisvę vandenyje su Yamaha vandens transporto priemonėmis')}</p>
+            <button className="cta-button">{t('hero.exploreButton', 'Tyrinėti produktus')}</button>
           </div>
         </section>
 
@@ -70,49 +103,19 @@ const Vanduo = () => {
         <section className="featured-models">
           <div className="container">
             <h2>{t('watercraft.featured_title', 'Populiarūs modeliai')}</h2>
-            <div className="models-grid">
-              <div className="model-card">
-                <div className="model-image">
-                  <img src="/src/assets/models/waverunner-fx.jpg" alt="WaveRunner FX" />
-                </div>
-                <div className="model-info">
-                  <h3>WaveRunner FX HO</h3>
-                  <p>{t('watercraft.fx_desc', 'Prabangus ir galingas vandens motociklas')}</p>
-                  <div className="model-price">
-                    <span className="price">€16,999</span>
-                  </div>
-                  <button className="model-btn">{t('watercraft.learn_more', 'Sužinoti daugiau')}</button>
-                </div>
+            {loading && (
+              <div style={{ padding: '24px 0' }}>{t('shop.loading', 'Loading products...')}</div>
+            )}
+            {error && (
+              <div style={{ padding: '24px 0' }}>{error}</div>
+            )}
+            {!loading && !error && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {products.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
               </div>
-              
-              <div className="model-card">
-                <div className="model-image">
-                  <img src="/src/assets/models/waverunner-vx.jpg" alt="WaveRunner VX" />
-                </div>
-                <div className="model-info">
-                  <h3>WaveRunner VX</h3>
-                  <p>{t('watercraft.vx_desc', 'Universalus vandens motociklas šeimai')}</p>
-                  <div className="model-price">
-                    <span className="price">€12,499</span>
-                  </div>
-                  <button className="model-btn">{t('watercraft.learn_more', 'Sužinoti daugiau')}</button>
-                </div>
-              </div>
-              
-              <div className="model-card">
-                <div className="model-image">
-                  <img src="/src/assets/models/f25-outboard.jpg" alt="F25 Outboard" />
-                </div>
-                <div className="model-info">
-                  <h3>F25 Outboard</h3>
-                  <p>{t('watercraft.f25_desc', 'Patikimas išorinis variklis valtims')}</p>
-                  <div className="model-price">
-                    <span className="price">€4,299</span>
-                  </div>
-                  <button className="model-btn">{t('watercraft.learn_more', 'Sužinoti daugiau')}</button>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </section>
 

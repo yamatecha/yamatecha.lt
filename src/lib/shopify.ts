@@ -1,6 +1,35 @@
 // Shopify Storefront API Client Configuration
 import { createStorefrontApiClient } from '@shopify/storefront-api-client'
 
+type StorefrontVariables = {
+  query?: string
+  handle?: string
+  first?: number
+}
+
+type StorefrontResponse<TData> = {
+  data?: TData
+  errors?: unknown
+}
+
+type StorefrontClient = {
+  request: (query: string, options?: { variables?: StorefrontVariables }) => Promise<StorefrontResponse<unknown>>
+}
+
+type ProductsQueryData = {
+  products?: {
+    nodes?: Product[]
+    pageInfo?: {
+      hasNextPage?: boolean
+      endCursor?: string | null
+    }
+  }
+}
+
+type ProductQueryData = {
+  product?: Product | null
+}
+
 // Development mode - mock data since no Shopify store yet
 const isDevelopment = !import.meta.env.VITE_SHOPIFY_STORE_DOMAIN || 
                       import.meta.env.VITE_SHOPIFY_STORE_DOMAIN === 'your-store.myshopify.com'
@@ -167,13 +196,112 @@ const mockProducts: Product[] = [
       ]
     }
   }
+  ,
+  {
+    id: 'gid://shopify/Product/6',
+    title: 'Yamaha WaveRunner VX',
+    description: 'Fun and versatile personal watercraft for family adventures, combining performance with comfort.',
+    vendor: 'Yamaha',
+    productType: 'Watercraft',
+    handle: 'yamaha-waverunner-vx',
+    priceRange: {
+      minVariantPrice: {
+        amount: '12499.00',
+        currencyCode: 'EUR'
+      }
+    },
+    images: {
+      nodes: [
+        {
+          url: 'https://images.unsplash.com/photo-1528150177508-7cc0c36cda5c?w=400&h=300&fit=crop',
+          altText: 'Yamaha WaveRunner VX'
+        }
+      ]
+    },
+    variants: {
+      nodes: [
+        {
+          id: 'gid://shopify/ProductVariant/6',
+          title: 'Default Title',
+          price: '12499.00',
+          availableForSale: true
+        }
+      ]
+    }
+  },
+  {
+    id: 'gid://shopify/Product/7',
+    title: 'Yamaha WaveRunner FX HO',
+    description: 'Premium personal watercraft with powerful acceleration and advanced features for longer rides.',
+    vendor: 'Yamaha',
+    productType: 'Watercraft',
+    handle: 'yamaha-waverunner-fx-ho',
+    priceRange: {
+      minVariantPrice: {
+        amount: '16999.00',
+        currencyCode: 'EUR'
+      }
+    },
+    images: {
+      nodes: [
+        {
+          url: 'https://images.unsplash.com/photo-1544551763-cedba1e3f51f?w=400&h=300&fit=crop',
+          altText: 'Yamaha WaveRunner FX HO'
+        }
+      ]
+    },
+    variants: {
+      nodes: [
+        {
+          id: 'gid://shopify/ProductVariant/7',
+          title: 'Default Title',
+          price: '16999.00',
+          availableForSale: true
+        }
+      ]
+    }
+  },
+  {
+    id: 'gid://shopify/Product/8',
+    title: 'Yamaha F25 Outboard',
+    description: 'Reliable and lightweight outboard motor ideal for small boats, offering great fuel efficiency.',
+    vendor: 'Yamaha',
+    productType: 'Watercraft',
+    handle: 'yamaha-f25-outboard',
+    priceRange: {
+      minVariantPrice: {
+        amount: '4299.00',
+        currencyCode: 'EUR'
+      }
+    },
+    images: {
+      nodes: [
+        {
+          url: 'https://images.unsplash.com/photo-1528150177508-7cc0c36cda5c?w=400&h=300&fit=crop',
+          altText: 'Yamaha F25 Outboard motor'
+        }
+      ]
+    },
+    variants: {
+      nodes: [
+        {
+          id: 'gid://shopify/ProductVariant/8',
+          title: 'Default Title',
+          price: '4299.00',
+          availableForSale: true
+        }
+      ]
+    }
+  }
 ]
 
 // Mock client for development
-const mockClient = {
-  request: async (query: string, variables?: any) => {
+const mockClient: StorefrontClient = {
+  request: async (query: string, options?: { variables?: StorefrontVariables }) => {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 500))
+
+    const variables = options?.variables
     
     // Return mock data based on query type
     if (query.includes('getProducts') || query.includes('searchProducts')) {
@@ -190,6 +318,8 @@ const mockClient = {
           filteredProducts = filteredProducts.filter(p => p.productType === 'Accessories')
         } else if (queryStr.includes('product_type:electric bike')) {
           filteredProducts = filteredProducts.filter(p => p.productType === 'Electric Bike')
+        } else if (queryStr.includes('product_type:watercraft')) {
+          filteredProducts = filteredProducts.filter(p => p.productType === 'Watercraft')
         } else if (queryStr.includes('title:')) {
           const searchTerm = queryStr.match(/title:\*([^*]+)\*/)?.[1]
           if (searchTerm) {
@@ -231,21 +361,21 @@ const mockClient = {
 }
 
 // Real Shopify client for production (only create if credentials exist)
-let realClient: any = null
+let realClient: StorefrontClient | null = null
 if (!isDevelopment && import.meta.env.VITE_SHOPIFY_STORE_DOMAIN && import.meta.env.VITE_SHOPIFY_PUBLIC_ACCESS_TOKEN) {
   try {
     realClient = createStorefrontApiClient({
       storeDomain: import.meta.env.VITE_SHOPIFY_STORE_DOMAIN!,
       apiVersion: '2026-01',
       publicAccessToken: import.meta.env.VITE_SHOPIFY_PUBLIC_ACCESS_TOKEN!,
-    })
+    }) as unknown as StorefrontClient
   } catch (error) {
     console.warn('Failed to create Shopify client, falling back to mock data:', error)
     realClient = null
   }
 }
 
-const client = realClient || mockClient
+const client: StorefrontClient = realClient || mockClient
 
 export interface Product {
   id: string
@@ -383,36 +513,50 @@ export const shopifyQueries = {
 }
 
 export const shopifyAPI = {
-  async getProducts(variables?: { first?: number; query?: string }) {
+  async getProducts(
+    variables?: { first?: number; query?: string }
+  ): Promise<{ data: ProductsQueryData['products'] | null; errors: unknown[] | null }> {
     try {
       const { data, errors } = await client.request(shopifyQueries.getProducts, {
         variables,
       })
-      return { data: data?.products, errors }
+
+      const normalizedErrors = Array.isArray(errors) ? errors : errors ? [errors] : null
+      const typedData = (data as ProductsQueryData | undefined)?.products
+      return { data: typedData || null, errors: normalizedErrors }
     } catch (error) {
       console.error('Shopify API Error:', error)
       return { data: null, errors: [error] }
     }
   },
   
-  async getProduct(handle: string) {
+  async getProduct(handle: string): Promise<{ data: Product | null; errors: unknown[] | null }> {
     try {
       const { data, errors } = await client.request(shopifyQueries.getProduct, {
         variables: { handle },
       })
-      return { data: data?.product, errors }
+
+      const normalizedErrors = Array.isArray(errors) ? errors : errors ? [errors] : null
+      const typedData = (data as ProductQueryData | undefined)?.product
+      return { data: typeof typedData === 'undefined' ? null : typedData, errors: normalizedErrors }
     } catch (error) {
       console.error('Shopify API Error:', error)
       return { data: null, errors: [error] }
     }
   },
   
-  async searchProducts(query: string, first: number = 20) {
+  async searchProducts(
+    query: string,
+    first: number = 20
+  ): Promise<{ data: ProductsQueryData['products'] | null; errors: unknown[] | null }> {
     try {
       const { data, errors } = await client.request(shopifyQueries.searchProducts, {
         variables: { query, first },
       })
-      return { data: data?.products, errors }
+
+      const normalizedErrors = Array.isArray(errors) ? errors : errors ? [errors] : null
+      const typedData = (data as ProductsQueryData | undefined)?.products
+      return { data: typedData || null, errors: normalizedErrors }
     } catch (error) {
       console.error('Shopify API Error:', error)
       return { data: null, errors: [error] }

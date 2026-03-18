@@ -60,8 +60,7 @@ const Navbar = ({ isMenuOpen, setIsMenuOpen }: NavbarProps) => {
             <Link to="/daliu-katalogas" className="top-menu-item play-bold">{t('navbar.topMenu.partsCatalog')}</Link>
             <Link to="/apie-mus" className="top-menu-item play-bold">{t('navbar.topMenu.aboutUs')}</Link>
             <Link to="/kontaktai" className="top-menu-item play-bold">{t('navbar.topMenu.contacts')}</Link>
-            <a href="#shop" className="top-menu-item shop-link play-bold">{t('navbar.topMenu.onlineShop')}</a>
-            <LanguageSwitcher />
+                        <LanguageSwitcher />
           </div>
           <div className="top-menu mobile-only">
             <LanguageSwitcher />
@@ -99,9 +98,6 @@ const Navbar = ({ isMenuOpen, setIsMenuOpen }: NavbarProps) => {
             </li>
             <li className="nav-item mobile-only">
               <Link to="/kontaktai" className="nav-link play-regular" onClick={() => setIsMenuOpen(false)}>{t('navbar.topMenu.contacts')}</Link>
-            </li>
-            <li className="nav-item mobile-only">
-              <a href="#shop" className="nav-link shop-link play-regular" onClick={() => setIsMenuOpen(false)}>{t('navbar.topMenu.onlineShop')}</a>
             </li>
             <li className="nav-item">
               <Link to="/el-dviraciai" className="nav-link play-regular" onClick={() => setIsMenuOpen(false)}>{t('navbar.mainNav.electricBikes')}</Link>

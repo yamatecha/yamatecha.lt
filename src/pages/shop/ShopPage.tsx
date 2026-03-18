@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { shopifyAPI, type Product } from '../../lib/shopify'
 import ProductCard from '../../components/shop/ProductCard'
 
@@ -17,14 +17,11 @@ const ShopPage: React.FC = () => {
     { value: 'Motorcycle', label: 'Motorcycles' },
     { value: 'Parts', label: 'Parts & Accessories' },
     { value: 'Electric Bike', label: 'Electric Bikes' },
-    { value: 'Accessories', label: 'Accessories' }
+    { value: 'Accessories', label: 'Accessories' },
+    { value: 'Watercraft', label: 'Watercraft' }
   ]
 
-  useEffect(() => {
-    fetchProducts()
-  }, [filters])
-
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     setLoading(true)
     setError(null)
     
@@ -49,7 +46,7 @@ const ShopPage: React.FC = () => {
         setError('Failed to load products')
         console.error('Shopify errors:', errors)
       } else if (data?.nodes) {
-        let filteredProducts = [...data.nodes]
+        const filteredProducts = [...data.nodes]
         
         // Client-side sorting
         switch (filters.sortBy) {
@@ -81,7 +78,11 @@ const ShopPage: React.FC = () => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [filters])
+
+  useEffect(() => {
+    fetchProducts()
+  }, [fetchProducts])
 
   const handleQuickView = (product: Product) => {
     // TODO: Implement quick view modal
