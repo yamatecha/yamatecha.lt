@@ -42,7 +42,14 @@ const Vanduo = () => {
         {/* Hero Section */}
         <section className="hero-section">
           <div className="hero-video-background">
-            <img src="/src/assets/hero-watercraft.jpg" alt="Yamaha Watercraft" className="hero-video" />
+            <video 
+              src="https://github.com/yamatecha/yamatecha.lt/releases/download/videos/videoplayback.mp4"
+              autoPlay 
+              muted 
+              loop 
+              playsInline
+              className="hero-video" 
+            />
             <div className="hero-overlay"></div>
           </div>
           <div className="hero-content">
