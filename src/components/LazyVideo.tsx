@@ -53,12 +53,12 @@ const LazyVideo = ({
   }, []);
 
   useEffect(() => {
-    if (isInView && videoRef.current && autoPlay) {
+    if (isInView && videoRef.current && autoPlay && isLoaded) {
       videoRef.current.play().catch(err => {
         console.log('Auto-play failed:', err);
       });
     }
-  }, [isInView, autoPlay]);
+  }, [isInView, autoPlay, isLoaded]);
 
   const handleLoad = () => {
     setIsLoaded(true);
@@ -72,6 +72,11 @@ const LazyVideo = ({
 
   const handleCanPlay = () => {
     setIsLoaded(true);
+    if (autoPlay && videoRef.current && isInView) {
+      videoRef.current.play().catch(err => {
+        console.log('Auto-play failed on canPlay:', err);
+      });
+    }
     onLoad?.();
   };
 
