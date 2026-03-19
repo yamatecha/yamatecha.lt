@@ -7,7 +7,7 @@ const TestDrive = () => {
   return (
     <section className="test-drive-section">
       <div className="container">
-        <h2 className="test-drive-title">{t('testDrive.title')}</h2>
+        <h2 className="test-drive-title"><span style={{ color: '#dc2626' }}>{t('testDrive.title')}</span></h2>
         <div className="test-drive-banner">
           <div className="test-drive-image">
             <LazyImage 

@@ -22,8 +22,23 @@ const ExploreYamaha = () => {
   ];
 
   return (
-    <section className="explore-yamaha-section">
-      <div className="container">
+    <section className="hero-section">
+      <div className="hero-video-background">
+        <LazyImage 
+          src="/src/assets/hero.png"
+          alt="Yamaha Background"
+          fallbackSrc="/src/assets/hero.png"
+          className="hero-video"
+        />
+      </div>
+      <div className="hero-content-wrapper">
+        <div className="hero-content-top">
+          <h1><span style={{ color: '#dc2626' }}>{t('exploreYamaha.title')}</span></h1>
+          <div className="hero-logo-text">
+            <h2>Rev's Your Heart</h2>
+          </div>
+        </div>
+        
         {/* Two Large Promotional Cards */}
         <div className="promo-cards">
           {promoCards.map((card) => (
@@ -39,7 +54,7 @@ const ExploreYamaha = () => {
               <div className="promo-card-content">
                 <h3>{card.title}</h3>
                 <p>{card.subtitle}</p>
-                <button className="promo-button">{card.buttonText}</button>
+                <button className="cta-button promo-button">{card.buttonText}</button>
               </div>
             </div>
           ))}

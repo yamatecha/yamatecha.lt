@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import LazyImage from '../../components/LazyImage'
 import ProductCard from '../../components/shop/ProductCard'
 import { shopifyAPI, type Product } from '../../lib/shopify'
 import './el-dviraciai.css'
@@ -9,6 +10,61 @@ const ElDviraciai = () => {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [currentCategory, setCurrentCategory] = useState(0)
+  const [totalRotations, setTotalRotations] = useState(0)
+
+  const electricBikeCategories = [
+    {
+      id: 'urban',
+      title: t('electric_bikes.urban', 'Miesto'),
+      subtitle: t('electric_bikes.urban_desc', 'Tobuli miesto judrumui ir kasdienėms kelionėms'),
+      image: '/src/assets/urban-bike.jpg',
+      buttonText: t('electric_bikes.view_models', 'Žiūrėti modelius'),
+      link: '/elektriniai-dviraciai/urban'
+    },
+    {
+      id: 'mountain',
+      title: t('electric_bikes.mountain', 'Kalnų'),
+      subtitle: t('electric_bikes.mountain_desc', 'Galia ir kontrolė bekelės maršrutams'),
+      image: '/src/assets/mountain-bike.jpg',
+      buttonText: t('electric_bikes.view_models', 'Žiūrėti modelius'),
+      link: '/elektriniai-dviraciai/mountain'
+    },
+    {
+      id: 'trekking',
+      title: t('electric_bikes.trekking', 'Trekingo'),
+      subtitle: t('electric_bikes.trekking_desc', 'Universalūs dviračiai ilgoms kelionėms'),
+      image: '/src/assets/trekking-bike.jpg',
+      buttonText: t('electric_bikes.view_models', 'Žiūrėti modelius'),
+      link: '/elektriniai-dviraciai/trekking'
+    },
+    {
+      id: 'performance',
+      title: t('electric_bikes.performance', 'Sportiniai'),
+      subtitle: t('electric_bikes.performance_desc', 'Maksimali galima jėga ir greitis'),
+      image: '/src/assets/performance-bike.jpg',
+      buttonText: t('electric_bikes.view_models', 'Žiūrėti modelius'),
+      link: '/elektriniai-dviraciai/performance'
+    }
+  ]
+
+  const nextCategory = () => {
+    setCurrentCategory((prev) => (prev + 1) % electricBikeCategories.length)
+    setTotalRotations((prev) => prev + 1)
+  }
+
+  const prevCategory = () => {
+    setCurrentCategory((prev) => (prev - 1 + electricBikeCategories.length) % electricBikeCategories.length)
+    setTotalRotations((prev) => prev - 1)
+  }
+
+  useEffect(() => {
+    const interval = setInterval(nextCategory, 5000)
+    return () => clearInterval(interval)
+  }, [])
+
+  // Calculate actual rotation for infinite effect
+  const actualRotation = -(totalRotations * 360) / electricBikeCategories.length
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -40,7 +96,7 @@ const ElDviraciai = () => {
     <div className="el-dviraciai">
       <main className="main-content">
         {/* Hero Section */}
-        <section className="hero-section">
+        <section className="hero-section main-hero">
           <div className="hero-video-background">
             <video 
               src="https://github.com/yamatecha/yamatecha.lt/releases/download/videos/Yamaha.Bicycles.YDX-MORO.07.Introduction.webm" 
@@ -59,32 +115,83 @@ const ElDviraciai = () => {
           </div>
         </section>
 
-        {/* Categories Section */}
-        <section className="categories-section">
-          <div className="container">
-            <h2>{t('electric_bikes.categories_title', 'Pasirinkite savo kelią')}</h2>
-            <div className="categories-grid">
-              <div className="category-card">
-                <div className="category-icon">🏙️</div>
-                <h3>{t('electric_bikes.urban', 'Miesto')}</h3>
-                <p>{t('electric_bikes.urban_desc', 'Tobuli miesto judrumui ir kasdienėms kelionėms')}</p>
-              </div>
-              <div className="category-card">
-                <div className="category-icon">🏔️</div>
-                <h3>{t('electric_bikes.mountain', 'Kalnų')}</h3>
-                <p>{t('electric_bikes.mountain_desc', 'Galia ir kontrolė bekelės maršrutams')}</p>
-              </div>
-              <div className="category-card">
-                <div className="category-icon">🚴</div>
-                <h3>{t('electric_bikes.trekking', 'Trekingo')}</h3>
-                <p>{t('electric_bikes.trekking_desc', 'Universalūs dviračiai ilgoms kelionėms')}</p>
-              </div>
-              <div className="category-card">
-                <div className="category-icon">⚡</div>
-                <h3>{t('electric_bikes.performance', 'Sportiniai')}</h3>
-                <p>{t('electric_bikes.performance_desc', 'Maksimali galima jėga ir greitis')}</p>
+        {/* Electric Bike Categories - 3D Carousel */}
+        <section className="hero-section electric-bike-categories-3d-carousel">
+          <div className="hero-video-background">
+            <div className="carousel-background-pattern"></div>
+            <div className="hero-overlay"></div>
+          </div>
+          <div className="hero-content-wrapper">
+            {/* 3D Carousel */}
+            <div className="carousel-3d-container">
+              <div className="carousel-3d" style={{
+                transform: `rotateY(${actualRotation}deg)`
+              }}>
+                {electricBikeCategories.map((category, index) => {
+                  const angle = (360 / electricBikeCategories.length) * index
+                  const isActive = index === currentCategory
+                  const offset = index - currentCategory
+                  const normalizedOffset = offset < 0 ? offset + electricBikeCategories.length : offset
+                  
+                  return (
+                    <div
+                      key={category.id}
+                      className={`carousel-card-3d ${isActive ? 'active' : ''}`}
+                      style={{
+                        transform: `rotateY(${angle}deg) translateZ(${isActive ? '350px' : '300px'}) ${isActive ? 'scale(1.1)' : ''}`,
+                        opacity: normalizedOffset === 0 ? 1 : normalizedOffset === 1 || normalizedOffset === electricBikeCategories.length - 1 ? 0.7 : 0.3,
+                        pointerEvents: normalizedOffset === 0 ? 'auto' : 'none',
+                        zIndex: electricBikeCategories.length - Math.abs(offset)
+                      }}
+                      onClick={() => {
+                        const diff = index - currentCategory
+                        setTotalRotations((prev) => prev + diff)
+                        setCurrentCategory(index)
+                      }}
+                    >
+                      <div className="promo-card-image">
+                        <LazyImage 
+                          src={category.image} 
+                          alt={category.title}
+                          fallbackSrc="/src/assets/hero.png"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="promo-card-content">
+                        <h3>{category.title}</h3>
+                        <p>{category.subtitle}</p>
+                        <a href={category.link} className="cta-button promo-button">
+                          {category.buttonText}
+                        </a>
+                      </div>
+                    </div>
+                  )
+                })}
               </div>
             </div>
+
+            {/* 3D Carousel Controls */}
+            <div className="carousel-controls-3d">
+              <button className="carousel-btn-3d prev-btn-3d" onClick={prevCategory}>
+                ‹
+              </button>
+              <div className="carousel-dots-3d">
+                {electricBikeCategories.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`dot-3d ${index === currentCategory ? 'active' : ''}`}
+                    onClick={() => setCurrentCategory(index)}
+                  />
+                ))}
+              </div>
+              <button className="carousel-btn-3d next-btn-3d" onClick={nextCategory}>
+                ›
+              </button>
+            </div>
+          </div>
+          <div className="hero-content">
+            <h1><span style={{ color: '#dc2626' }}>{t('electric_bikes.categories_title', 'Pasirinkite savo kelią')}</span></h1>
+            <p>{t('electric_bikes.categories_subtitle', 'Atraskite idealų elektrinį dviratį savo poreikiams')}</p>
           </div>
         </section>
 

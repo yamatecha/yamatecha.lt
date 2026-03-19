@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './components/navbar'
 import Hero from './components/hero'
-import MotorcycleTabs from './components/motorcycle-tabs'
 import ExploreYamaha from './components/explore-yamaha'
 import Footer from './components/footer'
 import ScrollToTop from './components/ScrollToTop'
@@ -31,7 +30,6 @@ function App() {
             <main className="main-content">
               <Hero />
               <ExploreYamaha />
-              <MotorcycleTabs />
               <TestDrive />
             </main>
           } />

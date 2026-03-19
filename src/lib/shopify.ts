@@ -292,6 +292,204 @@ const mockProducts: Product[] = [
         }
       ]
     }
+  },
+  {
+    id: 'gid://shopify/Product/9',
+    title: 'Yamaha WR450F 2024',
+    description: 'Legenda tarp enduro motociklų. Galingas 450cc keturtaktis variklis, patobulinta pakaba ir lengva konstrukcija.',
+    vendor: 'Yamaha',
+    productType: 'Motorcycle',
+    handle: 'yamaha-wr450f-2024',
+    tags: ['off-road', 'enduro', 'featured'],
+    priceRange: {
+      minVariantPrice: {
+        amount: '9999.00',
+        currencyCode: 'EUR'
+      }
+    },
+    images: {
+      nodes: [
+        {
+          url: '/src/assets/models/wr450f.jpg',
+          altText: 'Yamaha WR450F off-road motorcycle'
+        }
+      ]
+    },
+    variants: {
+      nodes: [
+        {
+          id: 'gid://shopify/ProductVariant/9',
+          title: 'Default Title',
+          price: '9999.00',
+          availableForSale: true
+        }
+      ]
+    }
+  },
+  {
+    id: 'gid://shopify/Product/10',
+    title: 'Yamaha YZ250F 2024',
+    description: 'Motokroso čempionas. 250cc keturtaktis variklis su pažangia technologija ir lenktyninę charakteristiką.',
+    vendor: 'Yamaha',
+    productType: 'Motorcycle',
+    handle: 'yamaha-yz250f-2024',
+    tags: ['off-road', 'motocross', 'featured'],
+    priceRange: {
+      minVariantPrice: {
+        amount: '8499.00',
+        currencyCode: 'EUR'
+      }
+    },
+    images: {
+      nodes: [
+        {
+          url: '/src/assets/models/yz250f.jpg',
+          altText: 'Yamaha YZ250F motocross motorcycle'
+        }
+      ]
+    },
+    variants: {
+      nodes: [
+        {
+          id: 'gid://shopify/ProductVariant/10',
+          title: 'Default Title',
+          price: '8499.00',
+          availableForSale: true
+        }
+      ]
+    }
+  },
+  {
+    id: 'gid://shopify/Product/11',
+    title: 'Yamaha Ténéré 700 2024',
+    description: 'Nuotykių motociklas visoms sąlygoms. 689cpm CP2 variklis, universalus ir patikimas.',
+    vendor: 'Yamaha',
+    productType: 'Motorcycle',
+    handle: 'yamaha-tenere-700-2024',
+    tags: ['off-road', 'adventure', 'featured'],
+    priceRange: {
+      minVariantPrice: {
+        amount: '11299.00',
+        currencyCode: 'EUR'
+      }
+    },
+    images: {
+      nodes: [
+        {
+          url: '/src/assets/models/tenere-700.jpg',
+          altText: 'Yamaha Ténéré 700 adventure motorcycle'
+        }
+      ]
+    },
+    variants: {
+      nodes: [
+        {
+          id: 'gid://shopify/ProductVariant/11',
+          title: 'Default Title',
+          price: '11299.00',
+          availableForSale: true
+        }
+      ]
+    }
+  },
+  {
+    id: 'gid://shopify/Product/12',
+    title: 'Yamaha YZF-R1 2024',
+    description: 'Lenktyninis motociklas su MotoGP technologija. 998cc inline variklis su aukščiausios klasės elektronika.',
+    vendor: 'Yamaha',
+    productType: 'Motorcycle',
+    handle: 'yamaha-yzf-r1-2024',
+    tags: ['road', 'sport', 'featured'],
+    priceRange: {
+      minVariantPrice: {
+        amount: '25999.00',
+        currencyCode: 'EUR'
+      }
+    },
+    images: {
+      nodes: [
+        {
+          url: '/src/assets/models/yzf-r1.jpg',
+          altText: 'Yamaha YZF-R1 sport motorcycle'
+        }
+      ]
+    },
+    variants: {
+      nodes: [
+        {
+          id: 'gid://shopify/ProductVariant/12',
+          title: 'Default Title',
+          price: '25999.00',
+          availableForSale: true
+        }
+      ]
+    }
+  },
+  {
+    id: 'gid://shopify/Product/13',
+    title: 'Yamaha MT-07 2024',
+    description: 'Universalus naked motociklas kasdieniam naudojimui. 689cc CP2 variklis su puikiu charakteriu.',
+    vendor: 'Yamaha',
+    productType: 'Motorcycle',
+    handle: 'yamaha-mt-07-2024',
+    tags: ['road', 'naked', 'featured'],
+    priceRange: {
+      minVariantPrice: {
+        amount: '7499.00',
+        currencyCode: 'EUR'
+      }
+    },
+    images: {
+      nodes: [
+        {
+          url: '/src/assets/models/mt-07.jpg',
+          altText: 'Yamaha MT-07 naked motorcycle'
+        }
+      ]
+    },
+    variants: {
+      nodes: [
+        {
+          id: 'gid://shopify/ProductVariant/13',
+          title: 'Default Title',
+          price: '7499.00',
+          availableForSale: true
+        }
+      ]
+    }
+  },
+  {
+    id: 'gid://shopify/Product/14',
+    title: 'Yamaha Tracer 9 2024',
+    description: 'Sportinis turistinis motociklas visoms sąlygoms. 890cc CP3 variklis su komfortu.',
+    vendor: 'Yamaha',
+    productType: 'Motorcycle',
+    handle: 'yamaha-tracer-9-2024',
+    tags: ['road', 'touring', 'featured'],
+    priceRange: {
+      minVariantPrice: {
+        amount: '12999.00',
+        currencyCode: 'EUR'
+      }
+    },
+    images: {
+      nodes: [
+        {
+          url: '/src/assets/models/tracer-9.jpg',
+          altText: 'Yamaha Tracer 9 touring motorcycle'
+        }
+      ]
+    },
+    variants: {
+      nodes: [
+        {
+          id: 'gid://shopify/ProductVariant/14',
+          title: 'Default Title',
+          price: '12999.00',
+          availableForSale: true
+        }
+      ]
+    }
   }
 ]
 
@@ -320,6 +518,12 @@ const mockClient: StorefrontClient = {
           filteredProducts = filteredProducts.filter(p => p.productType === 'Electric Bike')
         } else if (queryStr.includes('product_type:watercraft')) {
           filteredProducts = filteredProducts.filter(p => p.productType === 'Watercraft')
+        } else if (queryStr.includes('tag:off-road')) {
+          filteredProducts = filteredProducts.filter(p => p.tags?.includes('off-road'))
+        } else if (queryStr.includes('tag:road')) {
+          filteredProducts = filteredProducts.filter(p => p.tags?.includes('road'))
+        } else if (queryStr.includes('tag:featured')) {
+          filteredProducts = filteredProducts.filter(p => p.tags?.includes('featured'))
         } else if (queryStr.includes('title:')) {
           const searchTerm = queryStr.match(/title:\*([^*]+)\*/)?.[1]
           if (searchTerm) {
@@ -384,6 +588,7 @@ export interface Product {
   vendor: string
   productType: string
   handle: string
+  tags?: string[]
   priceRange: {
     minVariantPrice: {
       amount: string
