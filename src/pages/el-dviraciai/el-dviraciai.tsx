@@ -43,7 +43,7 @@ const ElDviraciai = () => {
         <section className="hero-section">
           <div className="hero-video-background">
             <video 
-              src="/src/assets/video/Yamaha Bicycles YDX-MORO 07 Introduction.webm" 
+              src="https://github.com/yamatecha/yamatecha.lt/releases/download/videos/Yamaha.Bicycles.YDX-MORO.07.Introduction.webm" 
               autoPlay 
               muted 
               loop 

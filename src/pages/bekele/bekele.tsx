@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import LazyVideo from '../../components/LazyVideo'
 import './bekele.css'
 
-import tenereVideo from '../../assets/video/2026 Yamaha Ténéré 700 World Raid： Adventure has no limits.webm'
+const tenereVideo = 'https://github.com/yamatecha/yamatecha.lt/releases/download/videos/2026.Yamaha.Tenere.700.World.Raid.Adventure.has.no.limits.webm'
 
 const Bekele = () => {
   const { t } = useTranslation()
