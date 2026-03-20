@@ -15,10 +15,15 @@
 - **Framer Motion 12.37.0** - Animation library
 - **Lucide React 0.577.0** - Icon library
 - **Headless UI 2.2.9** - Accessible UI components
+- **Swiper 12.1.2** - Carousel/slider component
+- **react-responsive-3d-carousel 2.1.5** - 3D carousel component
 
 ### Routing & State
 - **React Router DOM 7.13.1** - Client-side routing
 - **React Hook Form 7.71.2** - Form management
+
+### E-commerce Integration
+- **Shopify Storefront API Client 1.0.10** - E-commerce backend integration
 
 ### Internationalization
 - **i18next 25.8.18** - Internationalization framework
@@ -39,38 +44,70 @@ yamatecha.lt/
 │   └── icons.svg
 ├── src/
 │   ├── components/             # Reusable UI components
-│   │   ├── LazyImage.tsx      # Optimized image loading
-│   │   ├── LazyVideo.tsx      # Optimized video loading
-│   │   ├── explore-yamaha.tsx # Product showcase
-│   │   ├── footer.tsx         # Site footer
-│   │   ├── hero.tsx           # Landing hero section
-│   │   ├── motorcycle-tabs.tsx # Product categories
-│   │   ├── navbar.tsx         # Navigation header
-│   │   ├── test-drive.tsx     # Test drive booking
-│   │   ├── navbar.css         # Navigation styles
+│   │   ├── Carousel3D/         # 3D carousel component
+│   │   │   ├── Carousel3D.tsx
+│   │   │   └── Carousel3D.css
+│   │   ├── shop/               # E-commerce components
+│   │   │   └── ProductCard.tsx # Product display card
+│   │   ├── LazyImage.tsx       # Optimized image loading
+│   │   ├── LazyVideo.tsx       # Optimized video loading
+│   │   ├── ScrollToTop.tsx     # Scroll to top utility
+│   │   ├── Dropdown.tsx        # Dropdown component
+│   │   ├── explore-yamaha.tsx  # Product showcase
+│   │   ├── footer.tsx          # Site footer
+│   │   ├── hero.tsx            # Landing hero section
+│   │   ├── language-switcher.tsx # Language toggle
+│   │   ├── navbar.tsx          # Navigation header
+│   │   ├── section.tsx         # Section wrapper
+│   │   ├── test-drive.tsx      # Test drive booking
+│   │   ├── navbar.css          # Navigation styles
+│   │   ├── Dropdown.css        # Dropdown styles
 │   │   ├── shared-components.css # Common component styles
 │   │   └── legacy-components.css # Remaining component styles
 │   ├── pages/                  # Route-specific pages
-│   │   ├── apie-mus/          # About us page
-│   │   │   ├── apie-mus.tsx   # About us component
-│   │   │   └── apie-mus.css   # About us styles
-│   │   └── servisas/          # Service page
-│   │       ├── servisas.tsx   # Service component
-│   │       └── servisas.css   # Service styles
+│   │   ├── apie-mus/           # About us page
+│   │   │   ├── apie-mus.tsx    # About us component
+│   │   │   └── apie-mus.css    # About us styles
+│   │   ├── bekele/             # Off-road page
+│   │   │   ├── bekele.tsx
+│   │   │   └── bekele-specific.css
+│   │   ├── daliu-katalogas/    # Parts catalog page
+│   │   │   ├── daliu-katalogas.tsx
+│   │   │   └── daliu-katalogas.css
+│   │   ├── el-dviraciai/       # Electric bikes page
+│   │   │   ├── el-dviraciai.tsx
+│   │   │   └── el-dviraciai-specific.css
+│   │   ├── kelias/             # Road vehicles page
+│   │   │   ├── kelias.tsx
+│   │   │   └── kelias-specific.css
+│   │   ├── kontaktai/          # Contact page
+│   │   │   ├── kontaktai.tsx
+│   │   │   └── kontaktai.css
+│   │   ├── priedai-aksesuarai/  # Accessories page
+│   │   │   ├── priedai-aksesuarai.tsx
+│   │   │   └── priedai-aksesuarai.css
+│   │   ├── servisas/           # Service page
+│   │   │   ├── servisas.tsx    # Service component
+│   │   │   └── servisas.css    # Service styles
+│   │   ├── shop/               # E-commerce shop page
+│   │   │   └── ShopPage.tsx
+│   │   ├── vanduo/             # Water vehicles page
+│   │   │   ├── vanduo.tsx
+│   │   │   └── vanduo-specific.css
+│   │   └── global-page-styles/ # Shared page styles
+│   │       └── page-styles.css
+│   ├── lib/                    # Utility libraries
+│   │   └── shopify.ts          # Shopify API integration
 │   ├── i18n/                   # Internationalization config
 │   │   └── index.ts
-│   ├── locales/                # Translation files
-│   │   ├── en.json            # English translations
-│   │   ├── lt.json            # Lithuanian translations
-│   │   └── ru.json            # Russian translations
 │   ├── assets/                 # Static media assets
-│   │   ├── video/
+│   │   ├── dirt road.jpg
+│   │   ├── ocean.jpg
 │   │   ├── geras LOGO.JPG
 │   │   ├── react.svg
 │   │   └── vite.svg
 │   ├── App.tsx                 # Main application component
 │   ├── App-global.css          # Global app styles (minimal)
-│   ├── App.css.backup          # Backup of original styles
 │   ├── index.css               # Base styles, variables, Tailwind
 │   └── main.tsx                # Application entry point
 ├── .gitignore                  # Git ignore rules
@@ -102,9 +139,17 @@ yamatecha.lt/
 - **Test Drive Booking** - Service appointment system
 
 ### Pages
-- **Home Page** (`/`) - Main landing page
+- **Home Page** (`/`) - Main landing page with hero, product showcase, and test drive sections
 - **About Us** (`/apie-mus`) - Company information and history
 - **Service** (`/servisas`) - Service booking and information
+- **Parts Catalog** (`/daliu-katalogas`) - Parts and components catalog
+- **Electric Bikes** (`/el-dviraciai`) - Electric bicycle products
+- **Road Vehicles** (`/kelias`) - Road motorcycles and vehicles
+- **Off-road** (`/bekele`) - Off-road and adventure vehicles
+- **Water Vehicles** (`/vanduo`) - Watercraft and marine equipment
+- **Accessories** (`/priedai-aksesuarai`) - Accessories and gear
+- **Contact** (`/kontaktai`) - Contact information and form
+- **Shop** (`/shop`) - E-commerce shopping interface
 
 ## Development Workflow
 
@@ -132,18 +177,32 @@ npm run test:ui      # Run tests with UI
 - **Shared Components** - Common styles in `shared-components.css`
 - **Legacy Components** - Remaining component styles in `legacy-components.css`
 - **Global Styles** - Minimal global styles in `App-global.css`
+- **Page-Specific Styles** - Individual CSS files for each page route
+- **Global Page Styles** - Shared page styles in `page-styles.css`
 
 ### Component Architecture
 - **Functional Components** with React Hooks
 - **Lazy Loading** for images and videos
 - **Separation of Concerns** between UI and logic
 - **Reusable Components** for consistent design
+- **3D Carousel** for enhanced product presentation
+- **Shop Components** for e-commerce functionality
+- **Language Switcher** for internationalization
 
 ### Performance Optimizations
 - **Code Splitting** with React.lazy
 - **Image Optimization** with LazyImage component
 - **Video Optimization** with LazyVideo component
 - **Build Optimization** with Vite
+- **Scroll Restoration** with ScrollToTop component
+
+### E-commerce Integration
+- **Shopify Storefront API** for product management
+- **Mock Data System** for development without live store
+- **Product Cards** with quick view and add to cart functionality
+- **Product Filtering** by type, tags, and search
+- **Price Display** with currency support
+- **Inventory Tracking** with availability status
 
 ### Internationalization
 - **Namespace-based** translations
@@ -255,10 +314,37 @@ npm run test:ui      # Run tests with UI
 - **Updated routing** to include service page navigation
 - **Enhanced code organization** with co-located styles and components
 
+### April 2026
+- **Expanded Page Structure** - Added 8 new specialized pages for different product categories
+- **E-commerce Integration** - Implemented Shopify Storefront API with mock data system
+- **Shop Components** - Added ProductCard component and ShopPage for e-commerce functionality
+- **3D Carousel** - Added Carousel3D component for enhanced product presentation
+- **Language Switcher** - Implemented dedicated component for language switching
+- **Scroll Restoration** - Added ScrollToTop utility for better navigation UX
+- **Enhanced Component Library** - Added Dropdown, Section wrapper, and other UI components
+
 ### CSS Structure Improvements
-- **Separated page styles** into individual CSS files
-- **Created shared component styles** for reusable patterns
+- **Separated page styles** into individual CSS files for each route
+- **Created shared component styles** for reusable design patterns
 - **Consolidated CSS variables** in index.css
 - **Removed duplicate styles** and cleaned up global styles
+- **Added global page styles** for consistent page layouts
 - **Maintained backward compatibility** with backup files
+
+### Product Catalog Expansion
+- **Electric Bikes Page** (`/el-dviraciai`) - Dedicated electric bicycle showcase
+- **Road Vehicles Page** (`/kelias`) - Road motorcycles and vehicles
+- **Off-road Page** (`/bekele`) - Off-road and adventure vehicles  
+- **Water Vehicles Page** (`/vanduo`) - Watercraft and marine equipment
+- **Accessories Page** (`/priedai-aksesuarai`) - Accessories and gear
+- **Parts Catalog** (`/daliu-katalogas`) - Parts and components catalog
+- **Contact Page** (`/kontaktai`) - Contact information and form
+- **Shop Page** (`/shop`) - E-commerce shopping interface
+
+### Technical Enhancements
+- **Shopify Integration** - Complete API client with development mock data
+- **Product Management** - Advanced filtering, search, and categorization
+- **Responsive Design** - Mobile-first approach across all pages
+- **Performance Optimizations** - Lazy loading, code splitting, and build optimization
+- **Type Safety** - Comprehensive TypeScript interfaces for all components
 

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import LanguageSwitcher from './language-switcher';
-import Dropdown from './Dropdown';
+import MegaMenu from './MegaMenu';
 import './navbar.css';
 
 interface NavbarProps {
@@ -10,43 +10,181 @@ interface NavbarProps {
 }
 
 const Navbar = ({ isMenuOpen, setIsMenuOpen }: NavbarProps) => {
-  const modeliaiItems = [
-    { label: 'KELIAS', to: '/kelias' },
-    { label: 'BEKELE', to: '/bekele' },
-    { label: 'VANDUO', to: '/vanduo' },
-    { label: 'EL-DVIRACIAI', to: '/el-dviraciai' }
+  const motorcycleCategories = [
+    {
+      id: 'motociklai',
+      label: 'MOTOCIKLAI',
+      subCategories: [
+        {
+          id: 'musu-motociklai',
+          label: 'Mūsų Motociklai',
+          hasArrow: true,
+          products: [
+            { id: 'r1-race', name: 'R1 RACE', image: '/src/assets/motorcycle-placeholder.jpg', badge: 'A' },
+            { id: 'r9', name: 'R9', image: '/src/assets/motorcycle-placeholder.jpg' },
+            { id: 'r7', name: 'R7', image: '/src/assets/motorcycle-placeholder.jpg' },
+            { id: 'r3', name: 'R3', image: '/src/assets/motorcycle-placeholder.jpg' },
+            { id: 'r125', name: 'R125', image: '/src/assets/motorcycle-placeholder.jpg' },
+            { id: 'r6-race', name: 'R6 RACE', image: '/src/assets/motorcycle-placeholder.jpg', badge: 'A' }
+          ]
+        },
+        {
+          id: 'compare-motorcycles',
+          label: 'Compare Motorcycles',
+          hasArrow: true
+        },
+        {
+          id: 'yard-built',
+          label: 'Yard Built',
+          hasArrow: true
+        }
+      ]
+    },
+    {
+      id: 'motoroleriai',
+      label: 'MOTOROLERIAI',
+      subCategories: [
+        {
+          id: 'musu-motoroleriai',
+          label: 'Mūsų Motoroleriai',
+          hasArrow: true
+        }
+      ]
+    },
+    {
+      id: 'ebike-systems',
+      label: 'EBIKE SYSTEMS',
+      subCategories: [
+        {
+          id: 'musu-ebike',
+          label: 'Mūsų E-Bike',
+          hasArrow: true
+        }
+      ]
+    }
   ];
 
-  const aksesuaraiItems = [
-    { label: 'HELMETS', to: '/helmets' },
-    { label: 'GLOVES', to: '/gloves' },
-    { label: 'JACKETS', to: '/jackets' }
+  const aksesuaraiCategories = [
+    {
+      id: 'helmets',
+      label: 'HELMETS',
+      subCategories: [
+        {
+          id: 'full-face',
+          label: 'Full Face',
+          hasArrow: true
+        },
+        {
+          id: 'open-face',
+          label: 'Open Face',
+          hasArrow: true
+        }
+      ]
+    }
   ];
 
-  const aprangaItems = [
-    { label: 'MARŠKINIAI', to: '/marskiniai' },
-    { label: 'KELNĖS', to: '/kelnes' },
-    { label: 'STRIUKĖS', to: '/striukes' },
-    { label: 'AVALYNĖ', to: '/avalynė' }
+  const aprangaCategories = [
+    {
+      id: 'marskiniai',
+      label: 'MARŠKINIAI',
+      subCategories: [
+        {
+          id: 't-shirts',
+          label: 'T-Shirts',
+          hasArrow: true
+        }
+      ]
+    }
   ];
 
-  const servisoPaslaugosItems = [
-    { label: 'TECHINĖ APŽIŪRA', to: '/technine-apsziura' },
-    { label: 'REMONTAS', to: '/remontas' },
-    { label: 'DIAKSTIKA', to: '/diagnostika' },
-    { label: 'PRIEŽIŪRA', to: '/prieziura' }
+  const servisoCategories = [
+    {
+      id: 'technine-apsziura',
+      label: 'TECHINĖ APŽIŪRA',
+      subCategories: [
+        {
+          id: 'prieziura',
+          label: 'Priežiūra',
+          hasArrow: true
+        },
+        {
+          id: 'kiti',
+          label: 'Kiti',
+          hasArrow: true
+        }
+      ]
+    }
   ];
 
-  const testDriveItems = [
-    { label: 'UŽSIREGISTRUOTI', to: '/test-drive-registration' },
-    { label: 'TERMINAI', to: '/test-drive-terminai' },
-    { label: 'TAISYKLĖS', to: '/test-drive-taisykles' },
-    { label: 'KONTAKTAI', to: '/test-drive-kontaktai' }
+  const testDriveCategories = [
+    {
+      id: 'registration',
+      label: 'UŽSIREGISTRUOTI',
+      subCategories: [
+        {
+          id: 'test-drive-form',
+          label: 'Registracijos forma',
+          hasArrow: true
+        },
+        {
+          id: 'requirements',
+          label: 'Reikalavimai',
+          hasArrow: true
+        }
+      ]
+    },
+    {
+      id: 'schedule',
+      label: 'TERMINAI',
+      subCategories: [
+        {
+          id: 'available-slots',
+          label: 'Laisvi terminai',
+          hasArrow: true
+        },
+        {
+          id: 'calendar',
+          label: 'Kalendorius',
+          hasArrow: true
+        }
+      ]
+    },
+    {
+      id: 'guidelines',
+      label: 'TAISYKLĖS',
+      subCategories: [
+        {
+          id: 'safety-rules',
+          label: 'Saugos taisyklės',
+          hasArrow: true
+        },
+        {
+          id: 'preparation',
+          label: 'Paruošimas',
+          hasArrow: true
+        }
+      ]
+    },
+    {
+      id: 'contacts',
+      label: 'KONTAKTAI',
+      subCategories: [
+        {
+          id: 'location',
+          label: 'Vieta',
+          hasArrow: true
+        },
+        {
+          id: 'phone-email',
+          label: 'Telefonas / El. paštas',
+          hasArrow: true
+        }
+      ]
+    }
   ];
 
   return (
     <header className="header">
-      {/* Main Navigation */}
       <nav className="main-nav">
         <div className="nav-container">
           <div className="logo">
@@ -65,29 +203,29 @@ const Navbar = ({ isMenuOpen, setIsMenuOpen }: NavbarProps) => {
                 </svg>
               </button>
             </div>
-            <Dropdown 
+            <MegaMenu 
               title="MŪSŲ MODELIAI" 
-              items={modeliaiItems}
+              categories={motorcycleCategories}
               onItemClick={() => setIsMenuOpen(false)}
             />
-            <Dropdown 
+            <MegaMenu 
               title="AKSESUARAI" 
-              items={aksesuaraiItems}
+              categories={aksesuaraiCategories}
               onItemClick={() => setIsMenuOpen(false)}
             />
-            <Dropdown 
+            <MegaMenu 
               title="APRANGA" 
-              items={aprangaItems}
+              categories={aprangaCategories}
               onItemClick={() => setIsMenuOpen(false)}
             />
-            <Dropdown 
+            <MegaMenu 
               title="SERVISO PASLAUGOS" 
-              items={servisoPaslaugosItems}
+              categories={servisoCategories}
               onItemClick={() => setIsMenuOpen(false)}
             />
-            <Dropdown 
+            <MegaMenu 
               title="TEST DRIVE" 
-              items={testDriveItems}
+              categories={testDriveCategories}
               onItemClick={() => setIsMenuOpen(false)}
             />
             <li className="nav-item language-nav-item desktop-only">

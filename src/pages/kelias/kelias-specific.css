@@ -1,0 +1,40 @@
+/* Kelias Page Specific Styles - Video and Background Overrides */
+
+/* Road Categories 3D Carousel - Road background */
+.road-categories-3d-carousel {
+  background-image: url('/src/assets/road-1882020.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Featured Models Section - Road background with overlay */
+.kelias .featured-models {
+  background: 
+    url('/src/assets/road-1882020.jpg') center/cover no-repeat fixed,
+    linear-gradient(135deg, rgba(248, 249, 250, 0.95) 0%, rgba(233, 236, 239, 0.95) 100%);
+}
+
+/* Ensure kelias carousel is fully transparent */
+.road-categories-3d-carousel .carousel-3d-wrapper,
+.road-categories-3d-carousel .carousel-3d-swiper,
+.road-categories-3d-carousel .swiper,
+.road-categories-3d-carousel .swiper-wrapper {
+  background: transparent !important;
+}
+
+/* Hero content positioning for featured models */
+.featured-models .hero-content-top {
+  position: absolute !important;
+  bottom: 60px !important;
+  left: 10% !important;
+  top: auto !important;
+  text-align: left !important;
+  z-index: 10 !important;
+  width: auto !important;
+  max-width: 600px !important;
+  margin-bottom: 0 !important;
+}
+
+/* Road carousel uses default red from global styles */

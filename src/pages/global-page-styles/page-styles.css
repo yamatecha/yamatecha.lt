@@ -1,11 +1,11 @@
-/* Electric Bikes Page Styles */
-.el-dviraciai {
+/* Global Page Styles - Shared across all pages */
+.page {
   min-height: 100vh;
   margin-top: 0; /* Remove negative margin - let navbar position correctly */
 }
 
-/* Override shared-components.css styles for el-dviraciai page */
-.el-dviraciai .main-content {
+/* Override shared-components.css styles for all pages */
+.page .main-content {
   min-height: 100vh !important; /* Override min-height that causes gap */
   margin: 0 !important;
   padding: 0 !important;
@@ -13,28 +13,57 @@
   flex-direction: column;
 }
 
-/* Reset all section styles for el-dviraciai page except hero-section */
-.el-dviraciai section:not(.hero-section) {
+/* Reset all section styles for all pages except hero-section */
+.page section:not(.hero-section) {
   margin: 0 !important;
   padding: 0 !important;
 }
 
 /* Hero Section - Match main hero design */
-.el-dviraciai .hero-section {
+.page .hero-section {
   position: relative;
   width: 100%;
-  height: calc(100vh - 50px); /* Match navbar height */
-  margin-top: 50px; /* Match navbar height */
+  height: 100vh; /* Full viewport height */
+  margin-top: 0; /* Remove margin - navbar is fixed overlay */
   overflow: hidden;
 }
 
 /* Main Hero Section - Full screen as originally */
-.el-dviraciai .hero-section.main-hero {
-  height: calc(100vh - 50px); /* Full screen height as originally */
+.page .hero-section.main-hero,
+.page .hero-section:first-child {
+  height: 100vh; /* Full screen height */
   margin-bottom: 0; /* Remove negative margin */
 }
 
-.el-dviraciai .hero-video-background {
+/* Second Hero Section - No navbar margin needed */
+.page .hero-section.road-categories-3d-carousel,
+.page .hero-section.watercraft-categories-3d-carousel,
+.page .hero-section.offroad-categories-3d-carousel,
+.page .hero-section.electric-bike-categories-3d-carousel {
+  margin-top: 0 !important; /* Remove navbar margin from second section */
+}
+
+/* Override hero-content-top margin from shared-components.css */
+.page .hero-content-top {
+  position: absolute;
+  top: 70px; /* Position below navbar */
+  left: 10%;
+  transform: none;
+  z-index: 10;
+  text-align: left;
+  width: auto;
+  max-width: 600px;
+}
+
+.page .hero-content-top h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  margin: 0;
+  padding: 20px;
+}
+
+.page .hero-video-background {
   position: absolute;
   top: 0;
   left: 0;
@@ -43,13 +72,13 @@
   z-index: -1;
 }
 
-.el-dviraciai .hero-video {
+.page .hero-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.el-dviraciai .hero-overlay {
+.page .hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -58,10 +87,10 @@
   background: none;
 }
 
-.el-dviraciai .hero-content {
+.page .hero-content {
   position: absolute;
   bottom: 60px;
-  left: 40px;
+  left: 10%;
   text-align: left;
   color: white;
   z-index: 1;
@@ -69,54 +98,38 @@
   max-width: 600px;
 }
 
-.el-dviraciai .hero-content h1 {
+.page .hero-content h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
   font-weight: 700;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-.el-dviraciai .hero-content p {
+.page .hero-content p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
   opacity: 0.9;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
-/* Electric Bike Categories 3D Carousel - Full Screen Section */
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Generic 3D Carousel Sections - Full Screen */
+.road-categories-3d-carousel,
+.watercraft-categories-3d-carousel,
+.offroad-categories-3d-carousel,
 .electric-bike-categories-3d-carousel {
   position: relative;
   width: 100%;
-  height: calc(100vh - 50px);
+  height: 100vh;
   margin-top: 0;
   overflow: hidden;
   flex-shrink: 0; /* Prevent flex shrinking */
-}
-
-/* Second Hero Section - No navbar margin needed */
-.el-dviraciai .hero-section.electric-bike-categories-3d-carousel {
-  margin-top: 0 !important; /* Remove navbar margin from second section */
-}
-
-.electric-bike-categories-3d-carousel .hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.carousel-background-pattern {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
-    radial-gradient(circle at 20% 50%, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 50%, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.4) 0%, transparent 70%);
 }
 
 /* Hero Content Top - Lift the title up */
@@ -182,12 +195,12 @@
 }
 
 .carousel-card-3d.active {
-  box-shadow: 0 35px 70px rgba(34, 197, 94, 0.3);
-  border-color: rgba(34, 197, 94, 0.5);
+  box-shadow: 0 35px 70px rgba(220, 38, 38, 0.3);
+  border-color: rgba(220, 38, 38, 0.5);
 }
 
 .carousel-card-3d.active:hover {
-  box-shadow: 0 45px 90px rgba(34, 197, 94, 0.4);
+  box-shadow: 0 45px 90px rgba(220, 38, 38, 0.4);
 }
 
 .carousel-card-3d .promo-card-image {
@@ -232,7 +245,7 @@
 }
 
 .carousel-card-3d .promo-button {
-  background: #22c55e;
+  background: #dc2626;
   color: white;
   border: none;
   padding: 10px 24px;
@@ -246,9 +259,9 @@
 }
 
 .carousel-card-3d .promo-button:hover {
-  background: #16a34a;
+  background: #b91c1c;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4);
+  box-shadow: 0 8px 20px rgba(220, 38, 38, 0.4);
 }
 
 /* 3D Carousel Controls */
@@ -286,7 +299,7 @@
   left: 50%;
   width: 0;
   height: 0;
-  background: rgba(34, 197, 94, 0.3);
+  background: rgba(220, 38, 38, 0.3);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   transition: all 0.3s ease;
@@ -298,8 +311,8 @@
 }
 
 .carousel-btn-3d:hover {
-  background: rgba(34, 197, 94, 0.2);
-  border-color: rgba(34, 197, 94, 0.5);
+  background: rgba(220, 38, 38, 0.2);
+  border-color: rgba(220, 38, 38, 0.5);
   transform: scale(1.1);
   color: white;
 }
@@ -327,7 +340,7 @@
   left: 50%;
   width: 0;
   height: 0;
-  background: rgba(34, 197, 94, 0.6);
+  background: rgba(220, 38, 38, 0.6);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   transition: all 0.3s ease;
@@ -350,351 +363,335 @@
   transform: scale(1.2);
 }
 
-/* Categories Section */
-.el-dviraciai .categories-section {
-  padding: 80px 20px;
-  background: white;
+/* Road Categories Section */
+.road-categories {
+  padding: 80px 0;
+  background: #f8f9fa;
 }
 
-.el-dviraciai .categories-section h2 {
+.road-categories h2 {
+  text-align: center;
   font-size: 2.5rem;
+  font-weight: 600;
   margin-bottom: 3rem;
-  color: #1f2937;
-  text-align: center;
+  color: #1a1a1a;
 }
 
-.el-dviraciai .categories-grid {
+.categories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2.5rem;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.el-dviraciai .category-card {
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 2.5rem 2rem;
-  text-align: center;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
-.el-dviraciai .category-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
-  transform: scaleX(0);
-  transition: transform 0.4s ease;
-}
-
-.el-dviraciai .category-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  border-color: #22c55e;
-}
-
-.el-dviraciai .category-card:hover::before {
-  transform: scaleX(1);
-}
-
-.el-dviraciai .category-card h3 {
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  color: #1f2937;
-  letter-spacing: -0.025em;
-}
-
-.el-dviraciai .category-card p {
-  color: #64748b;
-  line-height: 1.7;
-  font-size: 1.05rem;
-  margin: 0;
-}
-
-/* Featured Models Section */
-.el-dviraciai .featured-models {
-  padding: 80px 20px;
-  background: #f8fafc;
-}
-
-.el-dviraciai .featured-models h2 {
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
-  color: #1f2937;
-  text-align: center;
-}
-
-.el-dviraciai .models-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
-.el-dviraciai .model-card {
+.category-card {
   background: white;
-  border: 1px solid #e5e7eb;
   border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.el-dviraciai .model-card:hover {
+.category-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
 }
 
-.el-dviraciai .model-image {
-  width: 100%;
+.category-image {
   height: 200px;
-  background: #f3f4f6;
+  overflow: hidden;
+}
+
+.category-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover .category-image img {
+  transform: scale(1.05);
+}
+
+.category-content {
+  padding: 2rem;
+}
+
+.category-content h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+.category-content p {
+  color: #666;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.category-link {
+  display: inline-block;
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.category-link:hover {
+  color: #0052a3;
+  text-decoration: underline;
+}
+
+/* Featured Models Section - Full Screen */
+.featured-models {
+  position: relative;
+  width: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  overflow: hidden;
 }
 
-.el-dviraciai .model-image img {
+.featured-models .container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+/* Hero Content Top - Adjust positioning for featured models */
+.featured-models .hero-content-top {
+  position: relative;
+  margin-bottom: 3rem;
+  padding-top: 1rem;
+  z-index: 10;
+  text-align: center;
+}
+
+.featured-models .hero-content-top h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  margin: 0;
+  padding: 20px;
+}
+
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.model-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.model-card:hover {
+  transform: translateY(-5px);
+}
+
+.model-image {
+  height: 250px;
+  overflow: hidden;
+}
+
+.model-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.el-dviraciai .model-info {
-  padding: 1.5rem;
+.model-info {
+  padding: 2rem;
 }
 
-.el-dviraciai .model-info h3 {
-  font-size: 1.3rem;
-  margin-bottom: 0.5rem;
-  color: #1f2937;
-}
-
-.el-dviraciai .model-type {
-  color: #22c55e;
-  font-size: 0.9rem;
+.model-info h3 {
+  font-size: 1.75rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
 }
 
-.el-dviraciai .price {
+.model-info p {
+  color: #666;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.model-price {
+  margin-bottom: 1.5rem;
+}
+
+.price {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #22c55e;
-  margin-bottom: 1rem;
+  color: #0066cc;
 }
 
-.el-dviraciai .features {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 1rem;
-}
-
-.el-dviraciai .features li {
-  color: #6b7280;
-  font-size: 0.9rem;
-  margin-bottom: 0.3rem;
-}
-
-.el-dviraciai .view-details {
+.model-btn {
   width: 100%;
-  padding: 12px;
-  background: #22c55e;
+  padding: 12px 24px;
+  background: #0066cc;
   color: white;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s ease;
 }
 
-.el-dviraciai .view-details:hover {
-  background: #16a34a;
+.model-btn:hover {
+  background: #0052a3;
 }
 
-/* Technology Section */
-.el-dviraciai .technology-section {
-  padding: 80px 20px;
-  background: white;
+/* Road Features Section */
+.road-features {
+  padding: 80px 0;
+  background: #f8f9fa;
 }
 
-.el-dviraciai .technology-section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
-  color: #1f2937;
+.road-features h2 {
   text-align: center;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 3rem;
+  color: #1a1a1a;
 }
 
-.el-dviraciai .tech-grid {
+.features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
 }
 
-.el-dviraciai .tech-card {
+.feature-item {
   text-align: center;
   padding: 2rem;
-  background: #f8fafc;
-  border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.el-dviraciai .tech-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0066cc;
+  border-radius: 50%;
 }
 
-.el-dviraciai .tech-icon {
-  font-size: 3rem;
+.feature-icon img {
+  width: 40px;
+  height: 40px;
+  filter: brightness(0) invert(1);
+}
+
+.feature-item h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
   margin-bottom: 1rem;
+  color: #1a1a1a;
 }
 
-.el-dviraciai .tech-card h3 {
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
-  color: #1f2937;
-}
-
-.el-dviraciai .tech-card p {
-  color: #6b7280;
+.feature-item p {
+  color: #666;
   line-height: 1.6;
 }
 
-/* Test Drive Section */
-.el-dviraciai .test-drive-section {
-  padding: 80px 20px;
-  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+/* CTA Section */
+.cta-section {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
   color: white;
+}
+
+.cta-content {
   text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.el-dviraciai .test-drive-section h2 {
+.cta-content h2 {
   font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: white;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
 }
 
-.el-dviraciai .test-drive-section p {
-  font-size: 1.2rem;
+.cta-content p {
+  font-size: 1.25rem;
   margin-bottom: 2rem;
   opacity: 0.9;
 }
 
-.el-dviraciai .test-drive-form {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.el-dviraciai .form-input {
-  padding: 15px 20px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  background: rgba(255, 255, 255, 0.9);
-}
-
-.el-dviraciai .form-input:focus {
-  outline: none;
-  background: white;
-}
-
-.el-dviraciai .submit-button {
-  padding: 15px 30px;
-  background: white;
-  color: #22c55e;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.el-dviraciai .submit-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-}
-
-/* Contact Section */
-.el-dviraciai .contact-section {
-  padding: 80px 20px;
-  background: #f8fafc;
-  text-align: center;
-}
-
-.el-dviraciai .contact-section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #1f2937;
-}
-
-.el-dviraciai .contact-section p {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-  color: #6b7280;
-}
-
-.el-dviraciai .contact-buttons {
+.cta-buttons {
   display: flex;
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.el-dviraciai .contact-button {
-  padding: 15px 30px;
-  background: #22c55e;
-  color: white;
-  border: none;
+.primary-btn, .secondary-btn {
+  padding: 14px 28px;
   border-radius: 8px;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
   text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+  border: none;
 }
 
-.el-dviraciai .contact-button:hover {
+.primary-btn {
+  background: white;
+  color: #0066cc;
+}
+
+.primary-btn:hover {
+  background: #f8f9fa;
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
+}
+
+.secondary-btn {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.secondary-btn:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .el-dviraciai {
+  .page {
     margin-top: 0; /* Remove negative margin - let navbar position correctly */
   }
   
-  .el-dviraciai .hero-section {
-    height: calc(100vh - 60px); /* Match mobile navbar height */
-    margin-top: 60px; /* Match mobile navbar height */
+  .page .hero-section {
+    height: 100vh; /* Full viewport height */
+    margin-top: 0; /* Remove margin - navbar is fixed overlay */
   }
   
-  .el-dviraciai .hero-section.main-hero {
-    height: calc(100vh - 60px); /* Full screen height as originally */
+  .page .hero-section.main-hero,
+  .page .hero-section:first-child {
+    height: 100vh; /* Full screen height */
     margin-bottom: 0; /* Remove negative margin */
   }
   
+  .road-categories-3d-carousel,
+  .watercraft-categories-3d-carousel,
+  .offroad-categories-3d-carousel,
   .electric-bike-categories-3d-carousel {
-    height: calc(100vh - 60px);
+    height: 100vh;
     margin-top: 0;
   }
   
@@ -741,7 +738,7 @@
     font-size: 24px;
   }
   
-  .el-dviraciai .hero-content-top {
+  .page .hero-content-top {
     position: absolute;
     top: 15px;
     left: 10%;
@@ -752,11 +749,14 @@
     max-width: 80%;
   }
   
-  .el-dviraciai .hero-content-top h1 {
+  .page .hero-content-top h1 {
     font-size: 2.2rem;
     padding: 15px;
   }
   
+  .road-categories-3d-carousel,
+  .watercraft-categories-3d-carousel,
+  .offroad-categories-3d-carousel,
   .electric-bike-categories-3d-carousel {
     margin-top: 0;
     flex-shrink: 0;
@@ -779,62 +779,79 @@
     height: 12px;
   }
   
-  .el-dviraciai .hero-title {
+  .hero-title {
     font-size: 2.5rem;
   }
-
-  .el-dviraciai .hero-subtitle {
+  
+  .hero-subtitle {
     font-size: 1.1rem;
   }
-
-  .el-dviraciai .categories-grid {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-  }
-
-  .el-dviraciai .models-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .el-dviraciai .tech-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .el-dviraciai .test-drive-form {
+  
+  .categories-grid {
     grid-template-columns: 1fr;
-    gap: 1rem;
   }
-
-  .el-dviraciai .contact-buttons {
+  
+  .featured-models {
+    height: 100vh;
+    padding: 0;
+  }
+  
+  .featured-models .container {
+    padding: 0 15px;
+  }
+  
+  .featured-models h1 {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  }
+  
+  .featured-models .hero-content-top {
+    margin-bottom: 2rem;
+    padding-top: 0.5rem;
+  }
+  
+  .models-grid {
+    grid-template-columns: 1fr;
+    margin-top: 1.5rem;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .cta-buttons {
     flex-direction: column;
     align-items: center;
   }
-
-  .el-dviraciai .contact-button {
+  
+  .primary-btn, .secondary-btn {
     width: 100%;
     max-width: 300px;
   }
 }
 
 @media (max-width: 480px) {
-  .el-dviraciai {
+  .page {
     margin-top: 0; /* Remove negative margin - let navbar position correctly */
   }
   
-  .el-dviraciai .hero-section {
-    height: calc(100vh - 60px); /* Match small mobile navbar height */
-    margin-top: 60px; /* Match small mobile navbar height */
+  .page .hero-section {
+    height: 100vh; /* Full viewport height */
+    margin-top: 0; /* Remove margin - navbar is fixed overlay */
   }
   
-  .el-dviraciai .hero-section.main-hero {
-    height: calc(100vh - 60px); /* Full screen height as originally */
+  .page .hero-section.main-hero,
+  .page .hero-section:first-child {
+    height: 100vh; /* Full screen height */
     margin-bottom: 0; /* Remove negative margin */
   }
   
+  .road-categories-3d-carousel,
+  .watercraft-categories-3d-carousel,
+  .offroad-categories-3d-carousel,
   .electric-bike-categories-3d-carousel {
-    height: calc(100vh - 60px);
+    height: 100vh;
     margin-top: 0;
   }
   
@@ -911,6 +928,9 @@
     margin-top: 40px;
   }
   
+  .road-categories-3d-carousel,
+  .watercraft-categories-3d-carousel,
+  .offroad-categories-3d-carousel,
   .electric-bike-categories-3d-carousel {
     margin-top: 0;
     flex-shrink: 0;
@@ -921,33 +941,45 @@
     height: 10px;
   }
   
-  .el-dviraciai .hero-title {
+  .hero-title {
     font-size: 2rem;
   }
-
-  .el-dviraciai .hero-subtitle {
-    font-size: 1rem;
-  }
-
-  .el-dviraciai .categories-section h2,
-  .el-dviraciai .featured-models h2,
-  .el-dviraciai .technology-section h2,
-  .el-dviraciai .test-drive-section h2,
-  .el-dviraciai .contact-section h2 {
+  
+  .road-categories h2,
+  .featured-models h2,
+  .road-features h2,
+  .cta-content h2 {
     font-size: 2rem;
   }
-
-  .el-dviraciai .categories-section,
-  .el-dviraciai .featured-models,
-  .el-dviraciai .technology-section,
-  .el-dviraciai .test-drive-section,
-  .el-dviraciai .contact-section {
-    padding: 60px 20px;
+  
+  .featured-models {
+    height: 100vh;
+    padding: 0;
   }
-
-  .el-dviraciai .categories-grid,
-  .el-dviraciai .models-grid,
-  .el-dviraciai .tech-grid {
+  
+  .featured-models .container {
+    padding: 0 15px;
+  }
+  
+  .featured-models h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  }
+  
+  .featured-models .hero-content-top {
+    margin-bottom: 1.5rem;
+    padding-top: 0.5rem;
+  }
+  
+  .models-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  
+  .category-content,
+  .model-info {
+    padding: 1.5rem;
   }
 }

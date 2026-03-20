@@ -13,8 +13,8 @@
 .hero-section {
   position: relative;
   width: 100%;
-  height: calc(100vh - 50px); /* Full viewport height minus fixed header */
-  margin-top: 50px; /* Position below fixed header */
+  height: 100vh; /* Full viewport height */
+  margin-top: 0; /* Remove margin - navbar is fixed overlay */
   overflow: hidden;
 }
 
@@ -261,8 +261,8 @@
 .test-drive-section {
   position: relative;
   width: 100%;
-  height: calc(100vh - 50px); /* Full viewport height minus fixed header */
-  margin-top: 50px; /* Position below fixed header */
+  height: 100vh; /* Full viewport height */
+  margin-top: 0; /* Remove margin - navbar is fixed overlay */
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -333,8 +333,8 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .test-drive-section {
-    height: calc(100vh - 145px); /* Viewport height minus mobile fixed header */
-    margin-top: 145px; /* Position below mobile fixed header */
+    height: 100vh; /* Full viewport height */
+    margin-top: 0; /* Remove margin - navbar is fixed overlay */
   }
   
   .test-drive-title {
@@ -356,8 +356,8 @@
 
 @media (max-width: 480px) {
   .test-drive-section {
-    height: calc(100vh - 135px); /* Viewport height minus small mobile fixed header */
-    margin-top: 135px; /* Position below small mobile fixed header */
+    height: 100vh; /* Full viewport height */
+    margin-top: 0; /* Remove margin - navbar is fixed overlay */
   }
   
   .test-drive-title {
@@ -483,8 +483,8 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .hero-section {
-    height: calc(100vh - 145px); /* Viewport height minus mobile fixed header */
-    margin-top: 145px; /* Position below mobile fixed header */
+    height: 100vh; /* Full viewport height */
+    margin-top: 0; /* Remove margin - navbar is fixed overlay */
   }
   
   .hero-content-wrapper {
@@ -543,8 +543,8 @@
 
 @media (max-width: 480px) {
   .hero-section {
-    height: calc(100vh - 135px); /* Viewport height minus small mobile fixed header */
-    margin-top: 135px; /* Position below small mobile fixed header */
+    height: 100vh; /* Full viewport height */
+    margin-top: 0; /* Remove margin - navbar is fixed overlay */
   }
   
   .hero-content-wrapper {
