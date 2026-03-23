@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+ARCHITECTURE_AUDIT.md
+blueprint.md
+DONT_FORGET.md
+SHOPIFY_SETUP.md
+
+
