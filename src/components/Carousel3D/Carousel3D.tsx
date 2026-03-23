@@ -2,7 +2,7 @@ import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { EffectCoverflow, Pagination, Navigation, Autoplay } from 'swiper/modules'
 import 'swiper/swiper-bundle.css'
-import './Carousel3D.css'
+import styles from './Carousel3D.module.css'
 
 export interface CarouselItem {
   id: string
@@ -86,12 +86,12 @@ const Carousel3D: React.FC<Carousel3DProps> = ({
   // Convert items to carousel elements
   const carouselItems = items.map((item) => (
     <SwiperSlide key={item.id}>
-      <div className="carousel-card-content">
+      <div className={`carousel-card-content ${styles.cardContent}`}>
         {item.content ? (
           item.content
         ) : (
           <>
-            <div className="promo-card-image">
+            <div className={`promo-card-image ${styles.cardImage}`}>
               <img 
                 src={item.image} 
                 alt={item.title}
@@ -102,11 +102,11 @@ const Carousel3D: React.FC<Carousel3DProps> = ({
                 }}
               />
             </div>
-            <div className="promo-card-content">
+            <div className={`promo-card-content ${styles.cardOverlay}`}>
               <h3>{item.title}</h3>
               {item.subtitle && <p>{item.subtitle}</p>}
               {item.buttonText && item.link && (
-                <a href={item.link} className="promo-button">
+                <a href={item.link} className={`promo-button ${styles.promoButton}`}>
                   {item.buttonText}
                 </a>
               )}
@@ -119,7 +119,7 @@ const Carousel3D: React.FC<Carousel3DProps> = ({
 
   return (
     <div 
-      className={`carousel-3d-wrapper ${className}`}
+      className={`carousel-3d-wrapper ${className} ${styles.wrapper}`}
       style={{ height }}
     >
       <Swiper
@@ -129,8 +129,16 @@ const Carousel3D: React.FC<Carousel3DProps> = ({
         slidesPerView={slidesPerView}
         spaceBetween={spaceBetween}
         coverflowEffect={coverflowEffect}
-        pagination={dots ? { clickable: true } : false}
-        navigation={arrows}
+        pagination={dots ? { 
+          clickable: true,
+          el: '.swiper-pagination',
+          bulletClass: 'swiper-pagination-bullet',
+          bulletActiveClass: 'swiper-pagination-bullet-active'
+        } : false}
+        navigation={arrows ? {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        } : false}
         autoplay={autoplay ? {
           delay: interval,
           pauseOnMouseEnter: pauseOnHover,
@@ -141,7 +149,7 @@ const Carousel3D: React.FC<Carousel3DProps> = ({
         breakpoints={breakpoints}
         onSlideChange={(swiper) => onChange?.(swiper.activeIndex)}
         initialSlide={startIndex}
-        className="carousel-3d-swiper"
+        className={`carousel-3d-swiper ${styles.swiper}`}
       >
         {carouselItems}
       </Swiper>

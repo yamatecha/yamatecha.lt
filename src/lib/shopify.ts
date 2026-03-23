@@ -34,6 +34,13 @@ type ProductQueryData = {
 const isDevelopment = !import.meta.env.VITE_SHOPIFY_STORE_DOMAIN || 
                       import.meta.env.VITE_SHOPIFY_STORE_DOMAIN === 'your-store.myshopify.com'
 
+// Debug logging
+console.log('=== Shopify Debug ===')
+console.log('VITE_SHOPIFY_STORE_DOMAIN:', import.meta.env.VITE_SHOPIFY_STORE_DOMAIN)
+console.log('VITE_SHOPIFY_PUBLIC_ACCESS_TOKEN:', import.meta.env.VITE_SHOPIFY_PUBLIC_ACCESS_TOKEN ? 'SET' : 'NOT SET')
+console.log('isDevelopment:', isDevelopment)
+console.log('===================')
+
 // Mock data for development
 const mockProducts: Product[] = [
   {
@@ -639,7 +646,10 @@ export const shopifyQueries = {
             nodes {
               id
               title
-              price
+              price {
+                amount
+                currencyCode
+              }
               availableForSale
             }
           }
@@ -678,7 +688,10 @@ export const shopifyQueries = {
           nodes {
             id
             title
-            price
+            price {
+              amount
+              currencyCode
+            }
             availableForSale
             selectedOptions {
               name
@@ -722,15 +735,23 @@ export const shopifyAPI = {
     variables?: { first?: number; query?: string }
   ): Promise<{ data: ProductsQueryData['products'] | null; errors: unknown[] | null }> {
     try {
+      console.log('🔍 Shopify API Call - Variables:', variables)
       const { data, errors } = await client.request(shopifyQueries.getProducts, {
         variables,
       })
+      
+      console.log('📦 Shopify API Response:', { data, errors })
+      
+      // Log detailed GraphQL errors
+      if (errors && typeof errors === 'object' && 'graphQLErrors' in errors) {
+        console.log('🚨 GraphQL Errors:', errors.graphQLErrors)
+      }
 
       const normalizedErrors = Array.isArray(errors) ? errors : errors ? [errors] : null
       const typedData = (data as ProductsQueryData | undefined)?.products
       return { data: typedData || null, errors: normalizedErrors }
     } catch (error) {
-      console.error('Shopify API Error:', error)
+      console.error('❌ Shopify API Error:', error)
       return { data: null, errors: [error] }
     }
   },

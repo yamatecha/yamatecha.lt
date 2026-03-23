@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import ProductCard from '../../components/shop/ProductCard'
-import Carousel3D from '../../components/Carousel3D/Carousel3D'
-import { shopifyAPI, type Product } from '../../lib/shopify'
+import ProductCard from '../../../components/shop/ProductCard'
+import Carousel3D from '../../../components/Carousel3D/Carousel3D'
+import { shopifyAPI, type Product } from '../../../lib/shopify'
 import './vanduo-specific.css'
-import '../../pages/global-page-styles/page-styles.css'
+import '../../global-page-styles/page-styles.css'
 
 const Vanduo = () => {
   const { t } = useTranslation()

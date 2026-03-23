@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import './MegaMenu.css'
+import styles from './MegaMenu.module.css'
+import navbarStyles from './navbar.module.css'
 
 interface ProductItem {
   id: string
@@ -79,25 +80,25 @@ const MegaMenu = ({ title, categories, className = '', onItemClick }: MegaMenuPr
 
   return (
     <li 
-      className={`nav-item mega-menu ${isOpen ? 'active' : ''} ${className}`}
+      className={`nav-item mega-menu ${isOpen ? 'active' : ''} ${className} ${styles.container}`}
     >
-      <span className="nav-link mega-menu-toggle" onClick={handleToggle}>
+      <span className={`nav-link mega-menu-toggle ${styles.toggle} ${navbarStyles.navLink}`} onClick={handleToggle}>
         {title}
       </span>
       
-      <div className="mega-menu-dropdown">
-        <div className="mega-menu-content">
+      <div className={`mega-menu-dropdown ${styles.dropdown}`}>
+        <div className={`mega-menu-content ${styles.content}`}>
           {/* Column 1: Main Categories */}
-          <div className="mega-menu-column categories-column">
-            <div className="mega-menu-list">
+          <div className={`mega-menu-column categories-column ${styles.column} ${styles.categoriesColumn}`}>
+            <div className={`mega-menu-list ${styles.list}`}>
               {categories.map((category) => (
                 <button
                   key={category.id}
-                  className={`mega-menu-item category-item ${activeCategory === category.id ? 'active' : ''}`}
+                  className={`mega-menu-item category-item ${activeCategory === category.id ? 'active' : ''} ${styles.item}`}
                   onMouseEnter={() => handleCategoryHover(category.id)}
                 >
                   <span>{category.label}</span>
-                  <svg className="mega-menu-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg className={`mega-menu-arrow ${styles.arrow}`} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <polyline points="9 18 15 12 9 6"></polyline>
                   </svg>
                 </button>
@@ -107,17 +108,17 @@ const MegaMenu = ({ title, categories, className = '', onItemClick }: MegaMenuPr
 
           {/* Column 2: Sub Categories */}
           {activeCategoryData && (
-            <div className="mega-menu-column subcategories-column">
-              <div className="mega-menu-list">
+            <div className={`mega-menu-column subcategories-column ${styles.column} ${styles.subcategoriesColumn}`}>
+              <div className={`mega-menu-list ${styles.list}`}>
                 {activeCategoryData.subCategories.map((subCategory) => (
                   <button
                     key={subCategory.id}
-                    className={`mega-menu-item subcategory-item ${activeSubCategory === subCategory.id ? 'active' : ''}`}
+                    className={`mega-menu-item subcategory-item ${activeSubCategory === subCategory.id ? 'active' : ''} ${styles.item}`}
                     onMouseEnter={() => handleSubCategoryHover(subCategory.id)}
                   >
                     <span>{subCategory.label}</span>
                     {subCategory.hasArrow && (
-                      <svg className="mega-menu-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <svg className={`mega-menu-arrow ${styles.arrow}`} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <polyline points="9 18 15 12 9 6"></polyline>
                       </svg>
                     )}
@@ -126,8 +127,8 @@ const MegaMenu = ({ title, categories, className = '', onItemClick }: MegaMenuPr
               </div>
               
               {/* Footer in subcategories column */}
-              <div className="mega-menu-footer">
-                <Link to={`/${activeCategoryData.id}`} className="mega-menu-footer-link" onClick={handleItemClick}>
+              <div className={`mega-menu-footer ${styles.footer}`}>
+                <Link to={`/${activeCategoryData.id}`} className={`mega-menu-footer-link ${styles.footerLink}`} onClick={handleItemClick}>
                   <span>{activeCategoryData.label}</span>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <polyline points="9 18 15 12 9 6"></polyline>
@@ -139,25 +140,25 @@ const MegaMenu = ({ title, categories, className = '', onItemClick }: MegaMenuPr
 
           {/* Column 3: Further Sub Categories */}
           {activeSubCategoryData && activeSubCategoryData.products && (
-            <div className="mega-menu-column products-column">
-              <div className="mega-menu-products">
-                <div className="products-grid">
+            <div className={`mega-menu-column products-column ${styles.column} ${styles.productsColumn}`}>
+              <div className={`mega-menu-products ${styles.products}`}>
+                <div className={`products-grid ${styles.productsGrid}`}>
                   {activeSubCategoryData.products.map((product) => (
                     <Link
                       key={product.id}
                       to={`/product/${product.id}`}
-                      className="product-card"
+                      className={`product-card ${styles.productCard}`}
                       onClick={handleItemClick}
                     >
                       {product.badge && (
-                        <div className="product-badge">
+                        <div className={`product-badge ${styles.productBadge}`}>
                           <span>{product.badge}</span>
                         </div>
                       )}
-                      <div className="product-image">
+                      <div className={`product-image ${styles.productImage}`}>
                         <img src={product.image} alt={product.name} />
                       </div>
-                      <div className="product-name">
+                      <div className={`product-name ${styles.productName}`}>
                         <span>{product.name}</span>
                       </div>
                     </Link>
@@ -166,8 +167,8 @@ const MegaMenu = ({ title, categories, className = '', onItemClick }: MegaMenuPr
               </div>
               
               {/* Footer in products column */}
-              <div className="mega-menu-footer">
-                <Link to={`/${activeCategoryData?.id}/${activeSubCategoryData.id}`} className="mega-menu-footer-link" onClick={handleItemClick}>
+              <div className={`mega-menu-footer ${styles.footer}`}>
+                <Link to={`/${activeCategoryData?.id}/${activeSubCategoryData.id}`} className={`mega-menu-footer-link ${styles.footerLink}`} onClick={handleItemClick}>
                   <span>Naršyti visus {activeSubCategoryData.label}</span>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <polyline points="9 18 15 12 9 6"></polyline>

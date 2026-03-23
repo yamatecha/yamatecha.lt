@@ -5,7 +5,7 @@ import LazyVideo from '../../components/LazyVideo'
 import Carousel3D from '../../components/Carousel3D/Carousel3D'
 import { shopifyAPI, type Product } from '../../lib/shopify'
 import './bekele-specific.css'
-import '../../pages/global-page-styles/page-styles.css'
+import '../global-page-styles/page-styles.css'
 
 const tenereVideo = 'https://github.com/yamatecha/yamatecha.lt/releases/download/videos/2026.Yamaha.Tenere.700.World.Raid.Adventure.has.no.limits.webm'
 

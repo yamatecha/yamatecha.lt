@@ -9,11 +9,11 @@ import ApieMus from './pages/apie-mus/apie-mus'
 import Servisas from './pages/servisas/servisas'
 import DaliuKatalogas from './pages/daliu-katalogas/daliu-katalogas'
 import Kontaktai from './pages/kontaktai/kontaktai'
-import ElDviraciai from './pages/el-dviraciai/el-dviraciai'
+import ElDviraciai from './pages/musu_modeliai/el-dviraciai/el-dviraciai'
 import Kelias from './pages/kelias/kelias'
 import Bekele from './pages/bekele/bekele'
 import PriedaiAksesuarai from './pages/priedai-aksesuarai/priedai-aksesuarai'
-import Vanduo from './pages/vanduo/vanduo'
+import Vanduo from './pages/musu_modeliai/vandens_motociklai/vanduo'
 import TestDrive from './components/test-drive'
 
 function App() {

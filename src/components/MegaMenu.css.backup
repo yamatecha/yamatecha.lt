@@ -63,6 +63,7 @@ body.mega-menu-open {
 
 .categories-column {
   flex: 0 0 200px;
+  justify-content: flex-start;
 }
 
 .subcategories-column {
@@ -80,6 +81,9 @@ body.mega-menu-open {
 /* Mega Menu Lists */
 .mega-menu-list {
   padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 /* Mega Menu Items */
@@ -103,6 +107,7 @@ body.mega-menu-open {
   min-height: 40px;
   box-sizing: border-box;
   position: relative;
+  font-family: var(--play);
 }
 
 .mega-menu-item:hover,
@@ -206,6 +211,7 @@ body.mega-menu-open {
   font-size: 12px;
   font-weight: 500;
   line-height: 1.2;
+  font-family: var(--play);
 }
 
 .product-card:hover .product-name span {
@@ -228,6 +234,7 @@ body.mega-menu-open {
   font-size: 14px;
   font-weight: 600;
   transition: color 0.2s ease;
+  font-family: var(--play);
 }
 
 .mega-menu-footer-link:hover {

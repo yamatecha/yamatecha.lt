@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import LanguageSwitcher from './language-switcher';
 import MegaMenu from './MegaMenu';
-import './navbar.css';
+import styles from './navbar.module.css';
 
 interface NavbarProps {
   isMenuOpen: boolean
@@ -47,6 +47,83 @@ const Navbar = ({ isMenuOpen, setIsMenuOpen }: NavbarProps) => {
         {
           id: 'musu-motoroleriai',
           label: 'Mūsų Motoroleriai',
+          hasArrow: true
+        }
+      ]
+    },
+    {
+      id: 'el-dviraciai',
+      label: 'ELEKTRINIAI DVIRACIAI',
+      subCategories: [
+        {
+          id: 'musu-el-dviraciai',
+          label: 'Mūsų Elektriniai Dviraciai',
+          hasArrow: true
+        }
+      ]
+    },
+    {
+      id: 'generatoriai',
+      label: 'GENERATORIAI',
+      subCategories: [
+        {
+          id: 'musu-generatoriai',
+          label: 'Mūsų Generatoriai',
+          hasArrow: true
+        }
+      ]
+    },
+    {
+      id: 'keturaciai',
+      label: 'KETURACIAI',
+      subCategories: [
+        {
+          id: 'musu-keturaciai',
+          label: 'Mūsų Keturaciai',
+          hasArrow: true
+        }
+      ]
+    },
+    {
+      id: 'lightweight-vecicales',
+      label: 'LIGHTWEIGHT VEHICLES',
+      subCategories: [
+        {
+          id: 'musu-lightweight',
+          label: 'Mūsų Lightweight Vehicles',
+          hasArrow: true
+        }
+      ]
+    },
+    {
+      id: 'vandens-motociklai',
+      label: 'VANDENS MOTOCIKLAI',
+      subCategories: [
+        {
+          id: 'musu-vandens',
+          label: 'Mūsų Vandens Motociklai',
+          hasArrow: true
+        }
+      ]
+    },
+    {
+      id: 'varikliai',
+      label: 'VARIKLIAI',
+      subCategories: [
+        {
+          id: 'musu-varikliai',
+          label: 'Mūsų Varikliai',
+          hasArrow: true
+        }
+      ]
+    },
+    {
+      id: 'boats',
+      label: 'VALCIAI',
+      subCategories: [
+        {
+          id: 'musu-boats',
+          label: 'Mūsų Valciai',
           hasArrow: true
         }
       ]
@@ -184,19 +261,19 @@ const Navbar = ({ isMenuOpen, setIsMenuOpen }: NavbarProps) => {
   ];
 
   return (
-    <header className="header">
-      <nav className="main-nav">
-        <div className="nav-container">
-          <div className="logo">
-            <Link to="/" className="logo-link">
-              <img src="/src/assets/geras LOGO.JPG" alt="YAMATECHA" className="logo-image" style={{ maxHeight: '35px', width: 'auto', marginLeft: '20%' }} />
+    <header className={`header ${styles.header}`}>
+      <nav className={`main-nav ${styles.mainNav}`}>
+        <div className={`nav-container ${styles.navContainer}`}>
+          <div className={`logo ${styles.logo}`}>
+            <Link to="/" className={`logo-link ${styles.logoLink}`}>
+              <img src="/src/assets/geras LOGO.JPG" alt="YAMATECHA" className={`logo-image ${styles.logoImage}`} style={{ maxHeight: '35px', width: 'auto', marginLeft: '20%' }} />
             </Link>
           </div>
           
-          <ul className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
-            <div className="menu-header">
-              <span className="menu-title">Menu</span>
-              <button className="menu-close" onClick={() => setIsMenuOpen(false)}>
+          <ul className={`nav-menu ${isMenuOpen ? 'active' : ''} ${styles.navMenu}`}>
+            <div className={`menu-header ${styles.menuHeader}`}>
+              <span className={`menu-title ${styles.menuTitle}`}>Menu</span>
+              <button className={`menu-close ${styles.menuClose}`} onClick={() => setIsMenuOpen(false)}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -228,15 +305,15 @@ const Navbar = ({ isMenuOpen, setIsMenuOpen }: NavbarProps) => {
               categories={testDriveCategories}
               onItemClick={() => setIsMenuOpen(false)}
             />
-            <li className="nav-item language-nav-item desktop-only">
+            <li className={`nav-item language-nav-item desktop-only ${styles.languageNavItem}`}>
               <LanguageSwitcher />
             </li>
           </ul>
 
-          <div className="nav-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            <span className="bar"></span>
-            <span className="bar"></span>
-            <span className="bar"></span>
+          <div className={`nav-toggle ${isMenuOpen ? 'active' : ''} ${styles.navToggle}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <span className={`bar ${styles.bar}`}></span>
+            <span className={`bar ${styles.bar}`}></span>
+            <span className={`bar ${styles.bar}`}></span>
           </div>
         </div>
       </nav>

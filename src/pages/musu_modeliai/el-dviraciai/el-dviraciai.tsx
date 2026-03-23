@@ -1,16 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import ProductCard from '../../components/shop/ProductCard'
-import Carousel3D from '../../components/Carousel3D/Carousel3D'
-import { shopifyAPI, type Product } from '../../lib/shopify'
+import ProductCard from '../../../components/shop/ProductCard'
+import Carousel3D from '../../../components/Carousel3D/Carousel3D'
+import { shopifyAPI, type Product } from '../../../lib/shopify'
 import './el-dviraciai-specific.css'
-import '../../pages/global-page-styles/page-styles.css'
+import '../../global-page-styles/page-styles.css'
 
 const ElDviraciai = () => {
   const { t } = useTranslation()
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  const handleQuickView = useCallback((product: Product) => {
+    // TODO: Implement quick view modal
+    console.log('Quick view:', product.title)
+  }, [])
+
+  const handleAddToCart = useCallback((variantId: string) => {
+    // TODO: Implement add to cart functionality
+    console.log('Add to cart:', variantId)
+  }, [])
 
   const electricBikeCategories = [
     {
@@ -85,17 +95,25 @@ const ElDviraciai = () => {
       setError(null)
 
       try {
+        console.log('🚀 Starting to fetch electric bike products...')
         const { data, errors } = await shopifyAPI.getProducts({
           first: 12,
           query: 'product_type:"Electric Bike"',
         })
 
+        console.log('📊 Fetch results:', { data, errors })
+
         if (errors?.length) {
+          console.error('❌ API errors:', errors)
           setError('Failed to load products')
         } else {
-          setProducts(data?.nodes || [])
+          const products = data?.nodes || []
+          console.log('🛒 Products loaded:', products.length)
+          console.log('📝 Product list:', products)
+          setProducts(products)
         }
-      } catch {
+      } catch (error) {
+        console.error('❌ Fetch error:', error)
         setError('Failed to load products')
       } finally {
         setLoading(false)
@@ -182,9 +200,6 @@ const ElDviraciai = () => {
 
         {/* Featured Models */}
         <section className="featured-models">
-          <div className="hero-video-background">
-            <div className="hero-overlay"></div>
-          </div>
           <div className="hero-content-top">
             <h1><span style={{ color: '#dc2626' }}>{t('electric_bikes.featured_title', 'Populiariausi modeliai')}</span></h1>
           </div>
@@ -198,14 +213,17 @@ const ElDviraciai = () => {
             {!loading && !error && (
               <div className="models-grid">
                 {products.map((product) => (
-                  <ProductCard key={product.id} product={product} />
+                  <ProductCard 
+                    key={product.id} 
+                    product={product} 
+                    onQuickView={handleQuickView}
+                    onAddToCart={handleAddToCart}
+                  />
                 ))}
               </div>
             )}
           </div>
         </section>
-
-
       </main>
     </div>
   )

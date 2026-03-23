@@ -4,7 +4,7 @@ import LazyImage from '../../components/LazyImage'
 import { shopifyAPI, type Product } from '../../lib/shopify'
 import Carousel3D, { type CarouselItem } from '../../components/Carousel3D'
 import './kelias-specific.css'
-import '../../pages/global-page-styles/page-styles.css'
+import '../global-page-styles/page-styles.css'
 
 const Kelias = () => {
   const { t } = useTranslation()
