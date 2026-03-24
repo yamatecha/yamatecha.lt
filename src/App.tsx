@@ -18,6 +18,8 @@ import TestDrive from './components/layout/TestDrive'
 import ProductDetail from './pages/product/ProductDetail'
 import CartPage from './pages/cart/CartPage'
 import { CartProvider } from './contexts/CartContext'
+import YamahaLocationsMap from './components/Map/YamahaLocationsMap'
+import styles from './components/Map/YamahaLocationsMap.module.css'
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -41,6 +43,12 @@ function App() {
               />
               <ExploreYamaha />
               <TestDrive />
+              <section className={styles.mapSection}>
+                <div className="container mx-auto px-4">
+                  <h2 className={styles.mapTitle}>MUS GALITE RASTI</h2>
+                  <YamahaLocationsMap />
+                </div>
+              </section>
             </main>
           } />
           <Route path="/apie-mus" element={<ApieMus />} />

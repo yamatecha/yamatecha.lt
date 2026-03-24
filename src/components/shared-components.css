@@ -6,6 +6,342 @@
   min-height: calc(100vh - 70px);
 }
 
+/* Explore Yamaha Section */
+.explore-yamaha-section {
+  width: 100%;
+  padding: 0;
+  background: #000;
+}
+
+/* Large Promo Cards Container */
+.explore-yamaha-section .promo-cards-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  width: 100%;
+  height: 600px;
+}
+
+.explore-yamaha-section .promo-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.explore-yamaha-section .promo-card-large {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.explore-yamaha-section .promo-card-large:hover {
+  transform: scale(1.02);
+}
+
+.explore-yamaha-section .promo-card-image {
+  width: 100%;
+  height: 100%;
+}
+
+.explore-yamaha-section .promo-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.explore-yamaha-section .promo-card-large:hover .promo-card-image img {
+  transform: scale(1.05);
+}
+
+.explore-yamaha-section .promo-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  pointer-events: none;
+}
+
+.explore-yamaha-section .promo-card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px;
+  z-index: 2;
+}
+
+.explore-yamaha-section .promo-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.explore-yamaha-section .promo-text-block {
+  margin-bottom: 24px;
+}
+
+.explore-yamaha-section .promo-title-small {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+  color: #FFFFFF;
+  text-transform: none;
+  line-height: 1.4;
+}
+
+.explore-yamaha-section .promo-title-large {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.1;
+}
+
+.explore-yamaha-section .promo-button-wrapper {
+  display: flex;
+}
+
+.explore-yamaha-section .promo-button {
+  background: #FFFFFF;
+  color: #121212;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: none;
+}
+
+.explore-yamaha-section .promo-button:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+}
+
+.explore-yamaha-section .button-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.explore-yamaha-section .button-text {
+  font-weight: 600;
+}
+
+/* Explore Categories Section */
+.explore-yamaha-section .explore-categories-section {
+  padding: 80px 40px;
+  background: #000;
+}
+
+.explore-yamaha-section .explore-title {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 60px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.explore-yamaha-section .categories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #333;
+}
+
+.explore-yamaha-section .category-card {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #000;
+}
+
+.explore-yamaha-section .category-card .category-image {
+  width: 100%;
+  height: 100%;
+}
+
+.explore-yamaha-section .category-card .category-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.explore-yamaha-section .category-card:hover .category-image img {
+  transform: scale(1.1);
+  filter: brightness(0.7);
+}
+
+.explore-yamaha-section .category-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  transition: background 0.3s ease;
+}
+
+.explore-yamaha-section .category-card:hover .category-overlay {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.explore-yamaha-section .category-name {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  padding: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .explore-yamaha-section .promo-cards-container {
+    height: 500px;
+  }
+  
+  .explore-yamaha-section .promo-title-large {
+    font-size: 2.5rem;
+  }
+  
+  .explore-yamaha-section .promo-title-small {
+    font-size: 1.1rem;
+  }
+  
+  .explore-yamaha-section .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .explore-yamaha-section .category-card {
+    height: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .explore-yamaha-section .promo-cards-container {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  
+  .explore-yamaha-section .promo-card-large {
+    height: 400px;
+  }
+  
+  .explore-yamaha-section .promo-card-content {
+    padding: 30px;
+  }
+  
+  .explore-yamaha-section .promo-title-large {
+    font-size: 2rem;
+  }
+  
+  .explore-yamaha-section .promo-title-small {
+    font-size: 1rem;
+  }
+  
+  .explore-yamaha-section .explore-categories-section {
+    padding: 60px 20px;
+  }
+  
+  .explore-yamaha-section .explore-title {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+  
+  .explore-yamaha-section .categories-grid {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+  
+  .explore-yamaha-section .category-card {
+    height: 200px;
+  }
+  
+  .explore-yamaha-section .category-name {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .explore-yamaha-section .promo-card-large {
+    height: 300px;
+  }
+  
+  .explore-yamaha-section .promo-card-content {
+    padding: 20px;
+  }
+  
+  .explore-yamaha-section .promo-title-large {
+    font-size: 1.6rem;
+  }
+  
+  .explore-yamaha-section .promo-title-small {
+    font-size: 0.9rem;
+  }
+  
+  .explore-yamaha-section .promo-text-block {
+    margin-bottom: 16px;
+  }
+  
+  .explore-yamaha-section .promo-button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  
+  .explore-yamaha-section .explore-title {
+    font-size: 1.5rem;
+  }
+  
+  .explore-yamaha-section .category-card {
+    height: 180px;
+  }
+  
+  .explore-yamaha-section .button-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Base styles for better reset */
+.explore-yamaha-section * {
+  font: inherit;
+  font-size: 100%;
+  box-sizing: border-box;
+}
+
+.explore-yamaha-section .promo-card-link {
+  display: block;
+  clear: none !important;
+  float: left;
+  width: 100%;
+  margin-left: 0;
+}
+
 /* Hero Section (Reusable) */
 .hero-section {
   position: relative;
@@ -254,124 +590,160 @@
   background: #f9fafb;
 }
 
-/* Test Drive Section - Full Screen */
+/* Test Drive Section */
 .test-drive-section {
-  position: relative;
   width: 100%;
-  height: 100vh; /* Full viewport height */
-  margin-top: 0; /* Remove margin - navbar is fixed overlay */
-  overflow: hidden;
+  padding: 80px 0;
+  background: #000;
+}
+
+.test-drive-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.test-drive-section .test-drive-title {
+  font-size: 3rem !important;
+  font-weight: 700 !important;
+  color: #FFFFFF !important;
+  margin: 0 0 40px 0;
+  text-transform: none;
+}
+
+@media (max-width: 768px) {
+  .test-drive-section .test-drive-title {
+    font-size: 2rem !important; /* Adjust as needed */
+    line-height: 1.2 !important; /* Adjust as needed to prevent overlapping */
+  }
+}
+
+.test-drive-content {
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
-.test-drive-title {
-  font-size: 3rem;
-  margin-bottom: 2rem;
-  font-weight: 700;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-.test-drive-banner {
-  position: relative;
+.test-drive-card {
   width: 100%;
   max-width: 1200px;
-  height: 60vh;
-  border-radius: 16px;
+  height: 400px;
+  background-image: url('/src/assets/road-1882020.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
-.test-drive-image {
-  position: absolute;
-  top: 0;
-  left: 0;
+.test-drive-link {
+  display: block;
   width: 100%;
   height: 100%;
-  z-index: 1;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
 }
 
 .test-drive-button {
   position: absolute;
   bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #dc2626;
-  color: white;
+  left: 40px;
+  background: #FFFFFF;
+  color: #121212;
   border: none;
   padding: 16px 32px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 600;
-  border-radius: 50px;
+  border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 12px;
-  z-index: 2;
-  box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
+  gap: 8px;
+  text-transform: none;
+  z-index: 10;
 }
 
 .test-drive-button:hover {
-  background: #b91c1c;
-  transform: translateX(-50%) translateY(-2px);
-  box-shadow: 0 15px 35px rgba(220, 38, 38, 0.4);
+  background: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-.arrow-icon {
-  transition: transform 0.3s ease;
+.test-drive-button .button-icon svg {
+  width: 24px;
+  height: 24px;
 }
 
-.test-drive-button:hover .arrow-icon {
-  transform: translateX(4px);
+.test-drive-button .button-text {
+  font-weight: 600;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .test-drive-section {
-    height: 100vh; /* Full viewport height */
-    margin-top: 0; /* Remove margin - navbar is fixed overlay */
+    padding: 60px 0;
+  }
+  
+  .test-drive-container {
+    padding: 0 20px;
   }
   
   .test-drive-title {
     font-size: 2.5rem;
-    margin-bottom: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 40px;
   }
 
-  .test-drive-banner {
-    height: 50vh;
-    margin: 0 20px;
+  .test-drive-card {
+    height: 300px;
   }
 
   .test-drive-button {
-    bottom: 30px;
     padding: 14px 28px;
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
   .test-drive-section {
-    height: 100vh; /* Full viewport height */
-    margin-top: 0; /* Remove margin - navbar is fixed overlay */
+    padding: 40px 0;
   }
   
   .test-drive-title {
     font-size: 2rem;
-    margin-bottom: 1rem;
+    font-weight: 700;
+    margin-bottom: 30px;
   }
 
-  .test-drive-banner {
-    height: 40vh;
-    margin: 0 15px;
+  .test-drive-card {
+    height: 250px;
   }
 
   .test-drive-button {
-    bottom: 20px;
     padding: 12px 24px;
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
+  
+  .test-drive-button .button-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Base styles for better reset */
+.test-drive-section * {
+  font: inherit;
+  font-size: 100%;
+  box-sizing: border-box;
+}
+
+.test-drive-section .test-drive-link {
+  display: block;
+  clear: none !important;
+  float: left;
+  width: 100%;
+  margin-left: 0;
 }
 
 /* Footer */

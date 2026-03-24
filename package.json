@@ -14,14 +14,17 @@
   "dependencies": {
     "@headlessui/react": "^2.2.9",
     "@shopify/storefront-api-client": "^1.0.10",
+    "@types/leaflet": "^1.9.21",
     "flag-icons": "^7.5.0",
     "framer-motion": "^12.37.0",
     "i18next": "^25.8.18",
+    "leaflet": "^1.9.4",
     "lucide-react": "^0.577.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-hook-form": "^7.71.2",
     "react-i18next": "^16.5.8",
+    "react-leaflet": "^5.0.0",
     "react-responsive-3d-carousel": "^2.1.5",
     "react-router-dom": "^7.13.1",
     "swiper": "^12.1.2"
