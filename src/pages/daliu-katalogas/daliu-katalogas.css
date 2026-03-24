@@ -131,9 +131,11 @@
 .daliu-katalogas .categories-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
+}
+
+.container {
   margin: 0 auto;
+  padding: 0 20px;
 }
 
 .daliu-katalogas .category-card {
@@ -166,96 +168,6 @@
 .daliu-katalogas .category-card p {
   color: #6b7280;
   line-height: 1.6;
-}
-
-/* Featured Products Section */
-.daliu-katalogas .featured-products {
-  padding: 80px 20px;
-  background: #f8fafc;
-}
-
-.daliu-katalogas .featured-products h2 {
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
-  color: #1f2937;
-  text-align: center;
-}
-
-.daliu-katalogas .products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.daliu-katalogas .product-card {
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.daliu-katalogas .product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-}
-
-.daliu-katalogas .product-image {
-  width: 100%;
-  height: 200px;
-  background: #f3f4f6;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.daliu-katalogas .product-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.daliu-katalogas .product-info {
-  padding: 1.5rem;
-}
-
-.daliu-katalogas .product-info h3 {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  color: #1f2937;
-}
-
-.daliu-katalogas .part-number {
-  color: #6b7280;
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-  font-family: monospace;
-}
-
-.daliu-katalogas .price {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #dc2626;
-  margin-bottom: 1rem;
-}
-
-.daliu-katalogas .add-to-cart {
-  width: 100%;
-  padding: 12px;
-  background: #dc2626;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.daliu-katalogas .add-to-cart:hover {
-  background: #b91c1c;
 }
 
 /* Order Information Section */
@@ -382,11 +294,6 @@
     gap: 1.5rem;
   }
 
-  .daliu-katalogas .products-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-  }
-
   .daliu-katalogas .order-steps {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -419,7 +326,6 @@
 
   .daliu-katalogas .search-section h2,
   .daliu-katalogas .categories-section h2,
-  .daliu-katalogas .featured-products h2,
   .daliu-katalogas .order-info h2,
   .daliu-katalogas .contact-section h2 {
     font-size: 2rem;
@@ -427,14 +333,12 @@
 
   .daliu-katalogas .search-section,
   .daliu-katalogas .categories-section,
-  .daliu-katalogas .featured-products,
   .daliu-katalogas .order-info,
   .daliu-katalogas .contact-section {
     padding: 60px 20px;
   }
 
-  .daliu-katalogas .categories-grid,
-  .daliu-katalogas .products-grid {
+  .daliu-katalogas .categories-grid {
     grid-template-columns: 1fr;
   }
 }

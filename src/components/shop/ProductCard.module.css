@@ -8,6 +8,10 @@
   border: 1px solid #f3f4f6;
   transition: all 0.5s ease;
   overflow: hidden;
+  width: 100%;
+  max-width: 320px;
+  min-height: 400px; /* Shorter cards for horizontal grid */
+  min-width: 0; /* Prevents flex items from overflowing */
 }
 
 .card:hover {
@@ -17,17 +21,22 @@
 
 /* Image Container */
 .imageContainer {
-  aspect-ratio: 1 / 1;
   overflow: hidden;
   background: linear-gradient(to bottom right, #f9fafb, #f3f4f6);
   position: relative;
+  height: 240px; /* Shorter image for horizontal grid */
+  width: 100%;
 }
 
 .image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Cover the container */
   transition: transform 0.7s ease;
+}
+
+.imageHover {
+  transform: scale(1.1);
 }
 
 .imageContainer:hover .image {
@@ -113,6 +122,10 @@
 /* Content Section */
 .content {
   padding: 1rem;
+  min-height: 120px; /* Shorter content for horizontal grid */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .vendor {
@@ -296,6 +309,15 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .card {
+    max-width: 100%;
+  }
+  
+  .imageContainer {
+    max-width: 300px; /* Constrain for mobile */
+    max-height: 300px;
+  }
+  
   .content {
     padding: 0.875rem;
   }
@@ -318,6 +340,15 @@
 }
 
 @media (max-width: 480px) {
+  .card {
+    max-width: 100%;
+  }
+  
+  .imageContainer {
+    max-width: 250px; /* Further constrain for small mobile */
+    max-height: 250px;
+  }
+  
   .content {
     padding: 0.75rem;
   }
@@ -332,5 +363,44 @@
   
   .price {
     font-size: 1rem;
+  }
+}
+
+/* Medium-large screen constraints */
+@media (min-width: 1024px) and (max-width: 1535px) {
+  .imageContainer {
+    min-height: 180px; /* Set height for 4-5 column grids */
+    max-height: 180px; /* Cap height */
+  }
+}
+
+/* Large screen optimizations for 6-column grid */
+@media (min-width: 1536px) {
+  .imageContainer {
+    min-height: 150px; /* Smaller height for 6-column grid */
+    max-height: 150px; /* Cap height for compact layout */
+  }
+  
+  .content {
+    padding: 0.75rem;
+  }
+  
+  .title {
+    font-size: 0.875rem;
+    line-height: 1.2;
+  }
+  
+  .description {
+    font-size: 0.75rem;
+    line-height: 1.3;
+  }
+  
+  .price {
+    font-size: 1rem;
+  }
+  
+  .button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
   }
 }

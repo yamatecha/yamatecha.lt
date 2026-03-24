@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import LazyImage from './LazyImage';
+import LazyImage from '../LazyImage';
 
 const TestDrive = () => {
   const { t } = useTranslation();

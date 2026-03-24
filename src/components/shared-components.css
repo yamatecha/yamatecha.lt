@@ -1,8 +1,5 @@
 /* Shared Components Styles */
 
-/* Import legacy component styles */
-@import './legacy-components.css';
-
 /* Main Content Layout */
 .main-content {
   width: 100%;

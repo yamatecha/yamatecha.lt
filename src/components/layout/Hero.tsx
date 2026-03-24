@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import LazyVideo from './LazyVideo';
+import LazyVideo from '../LazyVideo';
 const yamahaVideo = 'https://github.com/yamatecha/yamatecha.lt/releases/download/videos/2026.Yamaha.Tricity.300.Make.the.right.move.webm';
 
 const Hero = () => {

@@ -32,17 +32,17 @@ const ProductCard: React.FC<ProductCardProps> = ({
   
   return (
     <div 
-      className={`group relative ${styles.card} bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100`}
+      className={`group relative ${styles.card}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Product Image */}
-      <div className={`relative ${styles.imageContainer} aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100`}>
+      <div className={`relative ${styles.imageContainer}`}>
         {mainImage ? (
           <img
             src={mainImage.url}
             alt={mainImage.altText || product.title}
-            className={`${styles.image} w-full h-full object-cover transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
+            className={`${styles.image} ${isHovered ? styles.imageHover : ''}`}
           />
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">

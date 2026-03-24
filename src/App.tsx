@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './components/navbar'
-import Hero from './components/hero'
-import ExploreYamaha from './components/explore-yamaha'
+import Hero from './components/layout/Hero'
+import ExploreYamaha from './components/layout/ExploreYamaha'
 import Footer from './components/footer'
 import ScrollToTop from './components/ScrollToTop'
 import ApieMus from './pages/apie-mus/apie-mus'
@@ -14,7 +14,7 @@ import Kelias from './pages/kelias/kelias'
 import Bekele from './pages/bekele/bekele'
 import PriedaiAksesuarai from './pages/priedai-aksesuarai/priedai-aksesuarai'
 import Vanduo from './pages/musu_modeliai/vandens_motociklai/vanduo'
-import TestDrive from './components/test-drive'
+import TestDrive from './components/layout/TestDrive'
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)

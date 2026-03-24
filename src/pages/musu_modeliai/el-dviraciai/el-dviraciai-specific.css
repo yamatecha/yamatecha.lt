@@ -1,4 +1,4 @@
-/* Electric Bikes Page Specific Styles - Video and Background Overrides */
+/* Electric Bikes Page Specific Styles */
 
 /* Electric Bike Categories 3D Carousel - Background image */
 .electric-bike-categories-3d-carousel {
@@ -9,35 +9,7 @@
   background-attachment: fixed;
 }
 
-/* Featured Models Section - Background with overlay */
-/*.el-dviraciai .featured-models {
-  background: 
-}
-
-/* Hero content positioning for featured models - normal flow */
-.featured-models .hero-content-top {
-  position: relative !important;
-  bottom: auto !important;
-  left: auto !important;
-  top: auto !important;
-  text-align: center !important;
-  z-index: 10 !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  margin-bottom: 2rem !important;
-  padding: 0 1rem !important;
-}
-
-/* Fix hero content wrapper positioning */
-.featured-models .hero-content-wrapper {
-  position: relative !important;
-  z-index: 5 !important;
-  padding-top: 0 !important;
-  margin-top: 0 !important;
-  width: 100% !important;
-}
-
-/* Ensure el-dviraciai carousel is fully transparent */
+/* Ensure carousel is transparent */
 .electric-bike-categories-3d-carousel .carousel-3d-wrapper,
 .electric-bike-categories-3d-carousel .carousel-3d-swiper,
 .electric-bike-categories-3d-carousel .swiper,
@@ -45,54 +17,3 @@
   background: transparent !important;
 }
 
-/* Electric bike carousel uses green accent colors */
-
-/* Featured Models Section - Regular content section below carousel */
-.featured-models {
-  position: relative !important;
-  width: 100% !important;
-  min-height: auto !important;
-  height: auto !important;
-  padding: 4rem 0 !important;
-  overflow: visible !important;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
-}
-
-/* Product Grid Layout */
-.models-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  padding: 0 24px 24px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Override global hero positioning for featured models */
-.featured-models .hero-content-wrapper {
-  position: static !important;
-  top: auto !important;
-  left: auto !important;
-  transform: none !important;
-  z-index: 5 !important;
-  padding-top: 0 !important;
-  margin-top: 0 !important;
-  width: 100% !important;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .models-grid {
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
-    padding: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .models-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    padding: 12px;
-  }
-}

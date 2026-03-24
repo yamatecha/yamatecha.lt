@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import ProductCard from '../../components/shop/ProductCard'
+import { ProductGrid } from '../../components/layout/ProductGrid'
 import { shopifyAPI, type Product } from '../../lib/shopify'
 import './daliu-katalogas.css'
 
@@ -118,24 +118,12 @@ const DaliuKatalogas = () => {
         </section>
 
         {/* Featured Products */}
-        <section className="featured-products">
-          <div className="container">
-            <h2>{t('parts_catalog.featured_title', 'Populiarios dalys')}</h2>
-            {loading && (
-              <div style={{ padding: '24px 0' }}>{t('shop.loading', 'Loading products...')}</div>
-            )}
-            {error && (
-              <div style={{ padding: '24px 0' }}>{error}</div>
-            )}
-            {!loading && !error && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {products.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
+        <ProductGrid 
+          products={products}
+          title={t('parts_catalog.featured_title', 'Populiarios dalys')}
+          loading={loading}
+          error={error}
+        />
 
         {/* Order Information */}
         <section className="order-info">

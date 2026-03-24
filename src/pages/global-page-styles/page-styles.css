@@ -9,8 +9,8 @@
   min-height: 100vh !important; /* Override min-height that causes gap */
   margin: 0 !important;
   padding: 0 !important;
-  display: flex;
-  flex-direction: column;
+  display: block; /* Changed from flex - let ProductGrid work normally */
+  width: 100%;
 }
 
 /* Reset all section styles for all pages except hero-section */
@@ -114,7 +114,7 @@
 
 /* Container */
 .container {
-  max-width: 1200px;
+  /* max-width: 1200px; REMOVED - let grid expand */
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -455,18 +455,16 @@
 
 .featured-models .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: none; /* Remove max-width constraint for full width */
   padding: 0 20px;
-  text-align: center;
+  margin: 0 auto;
 }
 
 /* Hero Content Top - Adjust positioning for featured models */
-.featured-models .hero-content-top {
+.page .hero-content-top {
   position: relative;
   margin-bottom: 3rem;
   padding-top: 1rem;
-  z-index: 10;
-  text-align: center;
 }
 
 .featured-models .hero-content-top h1 {
@@ -477,12 +475,7 @@
   padding: 20px;
 }
 
-.models-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
+/* models-grid removed - now handled by page-specific CSS to avoid conflicts */
 
 .model-card {
   background: white;
@@ -810,10 +803,7 @@
     padding-top: 0.5rem;
   }
   
-  .models-grid {
-    grid-template-columns: 1fr;
-    margin-top: 1.5rem;
-  }
+  /* models-grid removed - now handled by page-specific CSS */
   
   .features-grid {
     grid-template-columns: 1fr;
@@ -971,11 +961,7 @@
     padding-top: 0.5rem;
   }
   
-  .models-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    margin-top: 1rem;
-  }
+  /* models-grid removed - now handled by page-specific CSS */
   
   .category-content,
   .model-info {
