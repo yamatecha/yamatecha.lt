@@ -9,7 +9,6 @@
   min-height: 100vh !important; /* Override min-height that causes gap */
   margin: 0 !important;
   padding: 0 !important;
-  display: block; /* Changed from flex - let ProductGrid work normally */
   width: 100%;
 }
 

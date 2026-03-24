@@ -5,6 +5,12 @@ type StorefrontVariables = {
   query?: string
   handle?: string
   first?: number
+  cartId?: string
+  lines?: Array<{ merchandiseId: string; quantity: number }>
+  lineIds?: string[]
+  input?: {
+    lines?: Array<{ merchandiseId: string; quantity: number }>
+  }
 }
 
 type StorefrontResponse<TData> = {
@@ -30,9 +36,43 @@ type ProductQueryData = {
   product?: Product | null
 }
 
-// Development mode - mock data since no Shopify store yet
-const isDevelopment = !import.meta.env.VITE_SHOPIFY_STORE_DOMAIN || 
-                      import.meta.env.VITE_SHOPIFY_STORE_DOMAIN === 'your-store.myshopify.com'
+export interface Cart {
+  id: string
+  checkoutUrl?: string
+  lines?: {
+    nodes?: CartLine[]
+  }
+  estimatedCost?: {
+    subtotalAmount?: {
+      amount: string
+      currencyCode: string
+    }
+  }
+}
+
+export interface CartLine {
+  id: string
+  merchandise: {
+    id: string
+    title: string
+    product?: {
+      title: string
+      handle: string
+    }
+    price?: {
+      amount: string
+      currencyCode: string
+    }
+    image?: {
+      url: string
+      altText?: string
+    }
+  }
+  quantity: number
+}
+
+// Real Shopify client setup
+const isDevelopment = false
 
 // Debug logging
 console.log('=== Shopify Debug ===')
@@ -41,539 +81,9 @@ console.log('VITE_SHOPIFY_PUBLIC_ACCESS_TOKEN:', import.meta.env.VITE_SHOPIFY_PU
 console.log('isDevelopment:', isDevelopment)
 console.log('===================')
 
-// Mock data for development
-const mockProducts: Product[] = [
-  {
-    id: 'gid://shopify/Product/1',
-    title: 'Yamaha MT-07 2024',
-    description: 'The perfect blend of performance and style. The MT-07 features a 689cc CP2 engine with exceptional torque and lightweight chassis.',
-    vendor: 'Yamaha',
-    productType: 'Motorcycle',
-    handle: 'yamaha-mt-07-2024',
-    priceRange: {
-      minVariantPrice: {
-        amount: '8999.00',
-        currencyCode: 'EUR'
-      }
-    },
-    images: {
-      nodes: [
-        {
-          url: 'https://images.unsplash.com/photo-1558980664-27a961535bad?w=400&h=300&fit=crop',
-          altText: 'Yamaha MT-07 in dark blue'
-        }
-      ]
-    },
-    variants: {
-      nodes: [
-        {
-          id: 'gid://shopify/ProductVariant/1',
-          title: 'Default Title',
-          price: '8999.00',
-          availableForSale: true
-        }
-      ]
-    }
-  },
-  {
-    id: 'gid://shopify/Product/2',
-    title: 'Yamaha YZF-R3 2024',
-    description: 'Entry-level sport bike with racing DNA. Features a 321cc inline twin engine and aggressive supersport styling.',
-    vendor: 'Yamaha',
-    productType: 'Motorcycle',
-    handle: 'yamaha-yzf-r3-2024',
-    priceRange: {
-      minVariantPrice: {
-        amount: '6499.00',
-        currencyCode: 'EUR'
-      }
-    },
-    images: {
-      nodes: [
-        {
-          url: 'https://images.unsplash.com/photo-1558980664-27a961535bad?w=400&h=300&fit=crop',
-          altText: 'Yamaha YZF-R3 in racing blue'
-        }
-      ]
-    },
-    variants: {
-      nodes: [
-        {
-          id: 'gid://shopify/ProductVariant/2',
-          title: 'Default Title',
-          price: '6499.00',
-          availableForSale: true
-        }
-      ]
-    }
-  },
-  {
-    id: 'gid://shopify/Product/3',
-    title: 'Yamaha Oil Filter',
-    description: 'Genuine Yamaha oil filter for optimal engine protection and performance.',
-    vendor: 'Yamaha',
-    productType: 'Parts',
-    handle: 'yamaha-oil-filter',
-    priceRange: {
-      minVariantPrice: {
-        amount: '12.99',
-        currencyCode: 'EUR'
-      }
-    },
-    images: {
-      nodes: [
-        {
-          url: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop',
-          altText: 'Yamaha oil filter'
-        }
-      ]
-    },
-    variants: {
-      nodes: [
-        {
-          id: 'gid://shopify/ProductVariant/3',
-          title: 'Standard Size',
-          price: '12.99',
-          availableForSale: true
-        }
-      ]
-    }
-  },
-  {
-    id: 'gid://shopify/Product/4',
-    title: 'Yamaha Racing Helmet',
-    description: 'Professional racing helmet with advanced safety features and aerodynamic design.',
-    vendor: 'Yamaha',
-    productType: 'Accessories',
-    handle: 'yamaha-racing-helmet',
-    priceRange: {
-      minVariantPrice: {
-        amount: '299.99',
-        currencyCode: 'EUR'
-      }
-    },
-    images: {
-      nodes: [
-        {
-          url: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop',
-          altText: 'Yamaha racing helmet'
-        }
-      ]
-    },
-    variants: {
-      nodes: [
-        {
-          id: 'gid://shopify/ProductVariant/4',
-          title: 'Medium',
-          price: '299.99',
-          availableForSale: true
-        }
-      ]
-    }
-  },
-  {
-    id: 'gid://shopify/Product/5',
-    title: 'Yamaha CrossCore RC Electric Bike',
-    description: 'Versatile electric bike with powerful motor and long battery life for urban commuting.',
-    vendor: 'Yamaha',
-    productType: 'Electric Bike',
-    handle: 'yamaha-crosscore-rc-electric-bike',
-    priceRange: {
-      minVariantPrice: {
-        amount: '2499.00',
-        currencyCode: 'EUR'
-      }
-    },
-    images: {
-      nodes: [
-        {
-          url: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop',
-          altText: 'Yamaha CrossCore RC Electric Bike'
-        }
-      ]
-    },
-    variants: {
-      nodes: [
-        {
-          id: 'gid://shopify/ProductVariant/5',
-          title: 'Default Title',
-          price: '2499.00',
-          availableForSale: true
-        }
-      ]
-    }
-  }
-  ,
-  {
-    id: 'gid://shopify/Product/6',
-    title: 'Yamaha WaveRunner VX',
-    description: 'Fun and versatile personal watercraft for family adventures, combining performance with comfort.',
-    vendor: 'Yamaha',
-    productType: 'Watercraft',
-    handle: 'yamaha-waverunner-vx',
-    priceRange: {
-      minVariantPrice: {
-        amount: '12499.00',
-        currencyCode: 'EUR'
-      }
-    },
-    images: {
-      nodes: [
-        {
-          url: 'https://images.unsplash.com/photo-1528150177508-7cc0c36cda5c?w=400&h=300&fit=crop',
-          altText: 'Yamaha WaveRunner VX'
-        }
-      ]
-    },
-    variants: {
-      nodes: [
-        {
-          id: 'gid://shopify/ProductVariant/6',
-          title: 'Default Title',
-          price: '12499.00',
-          availableForSale: true
-        }
-      ]
-    }
-  },
-  {
-    id: 'gid://shopify/Product/7',
-    title: 'Yamaha WaveRunner FX HO',
-    description: 'Premium personal watercraft with powerful acceleration and advanced features for longer rides.',
-    vendor: 'Yamaha',
-    productType: 'Watercraft',
-    handle: 'yamaha-waverunner-fx-ho',
-    priceRange: {
-      minVariantPrice: {
-        amount: '16999.00',
-        currencyCode: 'EUR'
-      }
-    },
-    images: {
-      nodes: [
-        {
-          url: 'https://images.unsplash.com/photo-1544551763-cedba1e3f51f?w=400&h=300&fit=crop',
-          altText: 'Yamaha WaveRunner FX HO'
-        }
-      ]
-    },
-    variants: {
-      nodes: [
-        {
-          id: 'gid://shopify/ProductVariant/7',
-          title: 'Default Title',
-          price: '16999.00',
-          availableForSale: true
-        }
-      ]
-    }
-  },
-  {
-    id: 'gid://shopify/Product/8',
-    title: 'Yamaha F25 Outboard',
-    description: 'Reliable and lightweight outboard motor ideal for small boats, offering great fuel efficiency.',
-    vendor: 'Yamaha',
-    productType: 'Watercraft',
-    handle: 'yamaha-f25-outboard',
-    priceRange: {
-      minVariantPrice: {
-        amount: '4299.00',
-        currencyCode: 'EUR'
-      }
-    },
-    images: {
-      nodes: [
-        {
-          url: 'https://images.unsplash.com/photo-1528150177508-7cc0c36cda5c?w=400&h=300&fit=crop',
-          altText: 'Yamaha F25 Outboard motor'
-        }
-      ]
-    },
-    variants: {
-      nodes: [
-        {
-          id: 'gid://shopify/ProductVariant/8',
-          title: 'Default Title',
-          price: '4299.00',
-          availableForSale: true
-        }
-      ]
-    }
-  },
-  {
-    id: 'gid://shopify/Product/9',
-    title: 'Yamaha WR450F 2024',
-    description: 'Legenda tarp enduro motociklų. Galingas 450cc keturtaktis variklis, patobulinta pakaba ir lengva konstrukcija.',
-    vendor: 'Yamaha',
-    productType: 'Motorcycle',
-    handle: 'yamaha-wr450f-2024',
-    tags: ['off-road', 'enduro', 'featured'],
-    priceRange: {
-      minVariantPrice: {
-        amount: '9999.00',
-        currencyCode: 'EUR'
-      }
-    },
-    images: {
-      nodes: [
-        {
-          url: '/src/assets/models/wr450f.jpg',
-          altText: 'Yamaha WR450F off-road motorcycle'
-        }
-      ]
-    },
-    variants: {
-      nodes: [
-        {
-          id: 'gid://shopify/ProductVariant/9',
-          title: 'Default Title',
-          price: '9999.00',
-          availableForSale: true
-        }
-      ]
-    }
-  },
-  {
-    id: 'gid://shopify/Product/10',
-    title: 'Yamaha YZ250F 2024',
-    description: 'Motokroso čempionas. 250cc keturtaktis variklis su pažangia technologija ir lenktyninę charakteristiką.',
-    vendor: 'Yamaha',
-    productType: 'Motorcycle',
-    handle: 'yamaha-yz250f-2024',
-    tags: ['off-road', 'motocross', 'featured'],
-    priceRange: {
-      minVariantPrice: {
-        amount: '8499.00',
-        currencyCode: 'EUR'
-      }
-    },
-    images: {
-      nodes: [
-        {
-          url: '/src/assets/models/yz250f.jpg',
-          altText: 'Yamaha YZ250F motocross motorcycle'
-        }
-      ]
-    },
-    variants: {
-      nodes: [
-        {
-          id: 'gid://shopify/ProductVariant/10',
-          title: 'Default Title',
-          price: '8499.00',
-          availableForSale: true
-        }
-      ]
-    }
-  },
-  {
-    id: 'gid://shopify/Product/11',
-    title: 'Yamaha Ténéré 700 2024',
-    description: 'Nuotykių motociklas visoms sąlygoms. 689cpm CP2 variklis, universalus ir patikimas.',
-    vendor: 'Yamaha',
-    productType: 'Motorcycle',
-    handle: 'yamaha-tenere-700-2024',
-    tags: ['off-road', 'adventure', 'featured'],
-    priceRange: {
-      minVariantPrice: {
-        amount: '11299.00',
-        currencyCode: 'EUR'
-      }
-    },
-    images: {
-      nodes: [
-        {
-          url: '/src/assets/models/tenere-700.jpg',
-          altText: 'Yamaha Ténéré 700 adventure motorcycle'
-        }
-      ]
-    },
-    variants: {
-      nodes: [
-        {
-          id: 'gid://shopify/ProductVariant/11',
-          title: 'Default Title',
-          price: '11299.00',
-          availableForSale: true
-        }
-      ]
-    }
-  },
-  {
-    id: 'gid://shopify/Product/12',
-    title: 'Yamaha YZF-R1 2024',
-    description: 'Lenktyninis motociklas su MotoGP technologija. 998cc inline variklis su aukščiausios klasės elektronika.',
-    vendor: 'Yamaha',
-    productType: 'Motorcycle',
-    handle: 'yamaha-yzf-r1-2024',
-    tags: ['road', 'sport', 'featured'],
-    priceRange: {
-      minVariantPrice: {
-        amount: '25999.00',
-        currencyCode: 'EUR'
-      }
-    },
-    images: {
-      nodes: [
-        {
-          url: '/src/assets/models/yzf-r1.jpg',
-          altText: 'Yamaha YZF-R1 sport motorcycle'
-        }
-      ]
-    },
-    variants: {
-      nodes: [
-        {
-          id: 'gid://shopify/ProductVariant/12',
-          title: 'Default Title',
-          price: '25999.00',
-          availableForSale: true
-        }
-      ]
-    }
-  },
-  {
-    id: 'gid://shopify/Product/13',
-    title: 'Yamaha MT-07 2024',
-    description: 'Universalus naked motociklas kasdieniam naudojimui. 689cc CP2 variklis su puikiu charakteriu.',
-    vendor: 'Yamaha',
-    productType: 'Motorcycle',
-    handle: 'yamaha-mt-07-2024',
-    tags: ['road', 'naked', 'featured'],
-    priceRange: {
-      minVariantPrice: {
-        amount: '7499.00',
-        currencyCode: 'EUR'
-      }
-    },
-    images: {
-      nodes: [
-        {
-          url: '/src/assets/models/mt-07.jpg',
-          altText: 'Yamaha MT-07 naked motorcycle'
-        }
-      ]
-    },
-    variants: {
-      nodes: [
-        {
-          id: 'gid://shopify/ProductVariant/13',
-          title: 'Default Title',
-          price: '7499.00',
-          availableForSale: true
-        }
-      ]
-    }
-  },
-  {
-    id: 'gid://shopify/Product/14',
-    title: 'Yamaha Tracer 9 2024',
-    description: 'Sportinis turistinis motociklas visoms sąlygoms. 890cc CP3 variklis su komfortu.',
-    vendor: 'Yamaha',
-    productType: 'Motorcycle',
-    handle: 'yamaha-tracer-9-2024',
-    tags: ['road', 'touring', 'featured'],
-    priceRange: {
-      minVariantPrice: {
-        amount: '12999.00',
-        currencyCode: 'EUR'
-      }
-    },
-    images: {
-      nodes: [
-        {
-          url: '/src/assets/models/tracer-9.jpg',
-          altText: 'Yamaha Tracer 9 touring motorcycle'
-        }
-      ]
-    },
-    variants: {
-      nodes: [
-        {
-          id: 'gid://shopify/ProductVariant/14',
-          title: 'Default Title',
-          price: '12999.00',
-          availableForSale: true
-        }
-      ]
-    }
-  }
-]
-
-// Mock client for development
-const mockClient: StorefrontClient = {
-  request: async (query: string, options?: { variables?: StorefrontVariables }) => {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 500))
-
-    const variables = options?.variables
-    
-    // Return mock data based on query type
-    if (query.includes('getProducts') || query.includes('searchProducts')) {
-      let filteredProducts = [...mockProducts]
-      
-      // Apply filters if provided
-      if (variables?.query) {
-        const queryStr = variables.query.toLowerCase()
-        if (queryStr.includes('product_type:motorcycle')) {
-          filteredProducts = filteredProducts.filter(p => p.productType === 'Motorcycle')
-        } else if (queryStr.includes('product_type:parts')) {
-          filteredProducts = filteredProducts.filter(p => p.productType === 'Parts')
-        } else if (queryStr.includes('product_type:accessories')) {
-          filteredProducts = filteredProducts.filter(p => p.productType === 'Accessories')
-        } else if (queryStr.includes('product_type:electric bike')) {
-          filteredProducts = filteredProducts.filter(p => p.productType === 'Electric Bike')
-        } else if (queryStr.includes('product_type:watercraft')) {
-          filteredProducts = filteredProducts.filter(p => p.productType === 'Watercraft')
-        } else if (queryStr.includes('tag:off-road')) {
-          filteredProducts = filteredProducts.filter(p => p.tags?.includes('off-road'))
-        } else if (queryStr.includes('tag:road')) {
-          filteredProducts = filteredProducts.filter(p => p.tags?.includes('road'))
-        } else if (queryStr.includes('tag:featured')) {
-          filteredProducts = filteredProducts.filter(p => p.tags?.includes('featured'))
-        } else if (queryStr.includes('title:')) {
-          const searchTerm = queryStr.match(/title:\*([^*]+)\*/)?.[1]
-          if (searchTerm) {
-            filteredProducts = filteredProducts.filter(p => 
-              p.title.toLowerCase().includes(searchTerm.toLowerCase())
-            )
-          }
-        }
-      }
-      
-      return {
-        data: {
-          products: {
-            nodes: filteredProducts,
-            pageInfo: {
-              hasNextPage: false,
-              endCursor: null
-            }
-          }
-        },
-        errors: null
-      }
-    }
-    
-    if (query.includes('getProduct')) {
-      const handle = variables?.handle
-      const product = mockProducts.find(p => p.handle === handle)
-      
-      return {
-        data: {
-          product: product || null
-        },
-        errors: product ? null : [{ message: 'Product not found' }]
-      }
-    }
-    
-    return { data: null, errors: [{ message: 'Unknown query' }] }
-  }
-}
-
-// Real Shopify client for production (only create if credentials exist)
+// Real Shopify client
 let realClient: StorefrontClient | null = null
-if (!isDevelopment && import.meta.env.VITE_SHOPIFY_STORE_DOMAIN && import.meta.env.VITE_SHOPIFY_PUBLIC_ACCESS_TOKEN) {
+if (import.meta.env.VITE_SHOPIFY_STORE_DOMAIN && import.meta.env.VITE_SHOPIFY_PUBLIC_ACCESS_TOKEN) {
   try {
     realClient = createStorefrontApiClient({
       storeDomain: import.meta.env.VITE_SHOPIFY_STORE_DOMAIN!,
@@ -581,12 +91,13 @@ if (!isDevelopment && import.meta.env.VITE_SHOPIFY_STORE_DOMAIN && import.meta.e
       publicAccessToken: import.meta.env.VITE_SHOPIFY_PUBLIC_ACCESS_TOKEN!,
     }) as unknown as StorefrontClient
   } catch (error) {
-    console.warn('Failed to create Shopify client, falling back to mock data:', error)
+    console.warn('Failed to create Shopify client:', error)
     realClient = null
   }
 }
 
-const client: StorefrontClient = realClient || mockClient
+// Force use of real Shopify client
+const client: StorefrontClient = realClient!
 
 export interface Product {
   id: string
@@ -727,7 +238,191 @@ export const shopifyQueries = {
         }
       }
     }
-  `
+  `,
+  
+  // Cart mutations
+  cartCreate: `
+    mutation cartCreate($input: CartInput!) {
+      cartCreate(input: $input) {
+        cart {
+          id
+          checkoutUrl
+          lines(first: 50) {
+            nodes {
+              id
+              merchandise {
+                ... on ProductVariant {
+                  id
+                  title
+                  product {
+                    title
+                    handle
+                  }
+                  price {
+                    amount
+                    currencyCode
+                  }
+                  image {
+                    url
+                    altText
+                  }
+                }
+              }
+              quantity
+            }
+          }
+          estimatedCost {
+            subtotalAmount {
+              amount
+              currencyCode
+            }
+          }
+        }
+        userErrors {
+          message
+        }
+      }
+    }
+  `,
+  
+  cartLinesAdd: `
+    mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
+      cartLinesAdd(cartId: $cartId, lines: $lines) {
+        cart {
+          id
+          checkoutUrl
+          lines(first: 50) {
+            nodes {
+              id
+              merchandise {
+                ... on ProductVariant {
+                  id
+                  title
+                  product {
+                    title
+                    handle
+                  }
+                  price {
+                    amount
+                    currencyCode
+                  }
+                  image {
+                    url
+                    altText
+                  }
+                }
+              }
+              quantity
+            }
+          }
+          estimatedCost {
+            subtotalAmount {
+              amount
+              currencyCode
+            }
+          }
+        }
+        userErrors {
+          message
+        }
+      }
+    }
+  `,
+  
+  cartCheckoutCreate: `
+    mutation cartCheckoutCreate($cartId: ID!) {
+      cartCheckoutCreate(cartId: $cartId) {
+        checkout {
+          checkoutUrl
+        }
+        cart {
+          id
+          checkoutUrl
+        }
+        userErrors {
+          message
+        }
+      }
+    }
+  `,
+  cartUpdate: `
+    mutation cartUpdate($cartId: ID!, $lines: [CartLineInput!]!) {
+      cartLinesUpdate(cartId: $cartId, lines: $lines) {
+        cart {
+          id
+          checkoutUrl
+          lines(first: 50) {
+            nodes {
+              id
+              merchandise {
+                ... on ProductVariant {
+                  id
+                  title
+                  product {
+                    title
+                    handle
+                  }
+                  price {
+                    amount
+                    currencyCode
+                  }
+                }
+              }
+              quantity
+            }
+          }
+          estimatedCost {
+            subtotalAmount {
+              amount
+              currencyCode
+            }
+          }
+        }
+        userErrors {
+          message
+        }
+      }
+    }
+  `,
+  
+  getCart: `
+    query getCart($cartId: ID!) {
+      cart(id: $cartId) {
+        id
+        checkoutUrl
+        lines(first: 50) {
+          nodes {
+            id
+            merchandise {
+              ... on ProductVariant {
+                id
+                title
+                product {
+                  title
+                  handle
+                }
+                price {
+                  amount
+                  currencyCode
+                }
+                image {
+                  url
+                  altText
+                }
+              }
+            }
+            quantity
+          }
+        }
+        estimatedCost {
+          subtotalAmount {
+            amount
+            currencyCode
+          }
+        }
+      }
+    }
+  `,
 }
 
 export const shopifyAPI = {
@@ -785,6 +480,73 @@ export const shopifyAPI = {
       return { data: typedData || null, errors: normalizedErrors }
     } catch (error) {
       console.error('Shopify API Error:', error)
+      return { data: null, errors: [error] }
+    }
+  },
+  
+  // Cart API functions
+  async createCart(lines: Array<{ merchandiseId: string; quantity: number }>): Promise<{ data: Cart | null; errors: unknown[] | null }> {
+    try {
+      const { data, errors } = await client.request(shopifyQueries.cartCreate, {
+        variables: { input: { lines } },
+      })
+
+      const normalizedErrors = Array.isArray(errors) ? errors : errors ? [errors] : null
+      const typedData = (data as { cartCreate?: { cart?: Cart } })?.cartCreate?.cart
+      return { data: typedData || null, errors: normalizedErrors }
+    } catch (error) {
+      console.error('Shopify Cart Create Error:', error)
+      return { data: null, errors: [error] }
+    }
+  },
+  
+  async addToCart(cartId: string, lines: Array<{ merchandiseId: string; quantity: number }>): Promise<{ data: Cart | null; errors: unknown[] | null }> {
+    try {
+      const { data, errors } = await client.request(shopifyQueries.cartLinesAdd, {
+        variables: { cartId, lines },
+      })
+
+      const normalizedErrors = Array.isArray(errors) ? errors : errors ? [errors] : null
+      const typedData = (data as { cartLinesAdd?: { cart?: Cart } })?.cartLinesAdd?.cart
+      return { data: typedData || null, errors: normalizedErrors }
+    } catch (error) {
+      console.error('Shopify Add to Cart Error:', error)
+      return { data: null, errors: [error] }
+    }
+  },
+  
+  async getCart(cartId: string): Promise<{ data: Cart | null; errors: unknown[] | null }> {
+    try {
+      const { data, errors } = await client.request(shopifyQueries.getCart, {
+        variables: { cartId },
+      })
+
+      const normalizedErrors = Array.isArray(errors) ? errors : errors ? [errors] : null
+      const typedData = (data as { cart?: Cart })?.cart
+      return { data: typedData || null, errors: normalizedErrors }
+    } catch (error) {
+      console.error('Shopify Get Cart Error:', error)
+      return { data: null, errors: [error] }
+    }
+  },
+  
+  async createCheckout(cartId: string): Promise<{ data: { checkoutUrl?: string } | null; errors: unknown[] | null }> {
+    try {
+      // Modern Cart API - get cart and use its checkoutUrl directly
+      const { data, errors } = await client.request(shopifyQueries.getCart, {
+        variables: { cartId },
+      })
+
+      const normalizedErrors = Array.isArray(errors) ? errors : errors ? [errors] : null
+      const cart = (data as { cart?: { checkoutUrl?: string } })?.cart
+      
+      if (cart?.checkoutUrl) {
+        return { data: { checkoutUrl: cart.checkoutUrl }, errors: null }
+      } else {
+        return { data: null, errors: normalizedErrors || [{ message: 'No checkout URL found' }] }
+      }
+    } catch (error) {
+      console.error('Shopify Create Checkout Error:', error)
       return { data: null, errors: [error] }
     }
   }

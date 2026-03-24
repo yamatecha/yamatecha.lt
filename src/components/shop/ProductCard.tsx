@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import type { Product } from '../../lib/shopify'
+import { useCart } from '../../contexts/CartContext'
 import styles from './ProductCard.module.css'
 
 interface ProductCardProps {
@@ -15,18 +16,21 @@ const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false)
   const [isAddingToCart, setIsAddingToCart] = useState(false)
+  const { addItem } = useCart()
   
   const mainImage = product.images.nodes[0]
   const firstVariant = product.variants.nodes[0]
   
   const handleAddToCart = async () => {
-    if (!onAddToCart || !firstVariant.availableForSale) return
+    if (!firstVariant.availableForSale) return
     
     setIsAddingToCart(true)
     try {
-      await onAddToCart(firstVariant.id)
+      await addItem(firstVariant.id, 1)
+    } catch (err) {
+      console.error('Failed to add to cart:', err)
     } finally {
-      setTimeout(() => setIsAddingToCart(false), 1000)
+      setIsAddingToCart(false)
     }
   }
   

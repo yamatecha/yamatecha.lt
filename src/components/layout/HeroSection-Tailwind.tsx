@@ -1,4 +1,5 @@
 import React from 'react'
+import LazyVideo from '../LazyVideo'
 
 interface HeroSectionProps {
   title: string;
@@ -23,11 +24,11 @@ export const HeroSectionTailwind: React.FC<HeroSectionProps> = ({
     {/* Background */}
     {videoSrc ? (
       <div className="hero-video-background">
-        <video 
-          src={videoSrc} 
-          autoPlay 
-          muted 
-          loop 
+        <LazyVideo
+          src={videoSrc}
+          autoPlay
+          muted
+          loop
           playsInline
           className="hero-video"
         />

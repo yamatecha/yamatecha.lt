@@ -3,25 +3,12 @@ import { useTranslation } from 'react-i18next'
 import { ProductGrid } from '../../../components/layout/ProductGrid'
 import { HeroSectionTailwind } from '../../../components/layout/HeroSection-Tailwind'
 import { shopifyAPI, type Product } from '../../../lib/shopify'
+import { useCart } from '../../../contexts/CartContext'
 
 const ElDviraciaiFinalTailwind = () => {
   const { t } = useTranslation()
+  const { addItem } = useCart()
   const [products, setProducts] = useState<Product[]>([])
-
-  const handleAddToCart = async (variantId: string) => {
-    const key = 'cart'
-    const raw = localStorage.getItem(key)
-    const items: Array<{ variantId: string; qty: number }> = raw ? JSON.parse(raw) : []
-    const idx = items.findIndex(i => i.variantId === variantId)
-
-    if (idx >= 0) {
-      items[idx] = { ...items[idx], qty: items[idx].qty + 1 }
-    } else {
-      items.push({ variantId, qty: 1 })
-    }
-
-    localStorage.setItem(key, JSON.stringify(items))
-  }
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -65,7 +52,7 @@ const ElDviraciaiFinalTailwind = () => {
           products={products}
           title={t('electric_bikes.featured_title', 'Populiariausi modeliai')}
           subtitle={t('electric_bikes.featured_subtitle', 'Geriausi pasirinkimai jūsų patogumui')}
-          onAddToCart={handleAddToCart}
+          onAddToCart={addItem}
         />
       </main>
     </div>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Navbar from './components/navbar'
-import Hero from './components/layout/Hero'
+import Navbar from './components/navbar.tsx'
+import { HeroSectionTailwind } from './components/layout/HeroSection-Tailwind'
 import ExploreYamaha from './components/layout/ExploreYamaha'
 import Footer from './components/footer'
 import ScrollToTop from './components/ScrollToTop'
@@ -15,20 +15,30 @@ import Bekele from './pages/bekele/bekele'
 import PriedaiAksesuarai from './pages/priedai-aksesuarai/priedai-aksesuarai'
 import Vanduo from './pages/musu_modeliai/vandens_motociklai/vanduo'
 import TestDrive from './components/layout/TestDrive'
+import ProductDetail from './pages/product/ProductDetail'
+import CartPage from './pages/cart/CartPage'
+import { CartProvider } from './contexts/CartContext'
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const yamahaVideo = 'https://github.com/yamatecha/yamatecha.lt/releases/download/videos/2026.Yamaha.Tricity.300.Make.the.right.move.webm'
 
   return (
     <Router>
       <ScrollToTop />
-      <div className="app">
-        <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-        
-        <Routes>
+      <CartProvider>
+        <div className="app">
+          <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+          
+          <Routes>
           <Route path="/" element={
             <main className="main-content">
-              <Hero />
+              <HeroSectionTailwind 
+                title="Yamaha"
+                subtitle="Patirkite judėjimo laisvę"
+                videoSrc={yamahaVideo}
+                ctaText="Atrasti daugiau"
+              />
               <ExploreYamaha />
               <TestDrive />
             </main>
@@ -41,11 +51,14 @@ function App() {
           <Route path="/bekele" element={<Bekele />} />
           <Route path="/priedai-aksesuarai" element={<PriedaiAksesuarai />} />
           <Route path="/vanduo" element={<Vanduo />} />
+          <Route path="/product/:handle" element={<ProductDetail />} />
+          <Route path="/cart" element={<CartPage />} />
                     <Route path="/kontaktai" element={<Kontaktai />} />
         </Routes>
         
         <Footer />
       </div>
+      </CartProvider>
     </Router>
   )
 }

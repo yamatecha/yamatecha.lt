@@ -46,24 +46,30 @@ yamatecha.lt/
 │   ├── components/             # Reusable UI components
 │   │   ├── Carousel3D/         # 3D carousel component
 │   │   │   ├── Carousel3D.tsx
-│   │   │   └── Carousel3D.css
+│   │   │   ├── Carousel3D.module.css
+│   │   │   └── index.ts
+│   │   ├── cart/               # E-commerce cart components 
+│   │   │   ├── CartIcon.tsx
+│   │   │   └── CartIcon.module.css
+│   │   ├── layout/             # Layout components
+│   │   │   ├── ExploreYamaha.tsx
+│   │   │   ├── HeroSection-Tailwind.tsx
+│   │   │   ├── ProductGrid.tsx
+│   │   │   ├── Section.tsx
+│   │   │   └── TestDrive.tsx
 │   │   ├── shop/               # E-commerce components
-│   │   │   └── ProductCard.tsx # Product display card
+│   │   │   └── ProductCard.tsx
+│   │   │   └── ProductCard.module.css
 │   │   ├── LazyImage.tsx       # Optimized image loading
 │   │   ├── LazyVideo.tsx       # Optimized video loading
 │   │   ├── ScrollToTop.tsx     # Scroll to top utility
-│   │   ├── Dropdown.tsx        # Dropdown component
-│   │   ├── explore-yamaha.tsx  # Product showcase
+│   │   ├── MegaMenu.tsx        # Navigation mega menu
+│   │   │   └── MegaMenu.module.css
 │   │   ├── footer.tsx          # Site footer
-│   │   ├── hero.tsx            # Landing hero section
 │   │   ├── language-switcher.tsx # Language toggle
 │   │   ├── navbar.tsx          # Navigation header
-│   │   ├── section.tsx         # Section wrapper
-│   │   ├── test-drive.tsx      # Test drive booking
-│   │   ├── navbar.css          # Navigation styles
-│   │   ├── Dropdown.css        # Dropdown styles
-│   │   ├── shared-components.css # Common component styles
-│   │   └── legacy-components.css # Remaining component styles
+│   │   │   └── navbar.module.css
+│   │   └── shared-components.css # Common component styles
 │   ├── pages/                  # Route-specific pages
 │   │   ├── apie-mus/           # About us page
 │   │   │   ├── apie-mus.tsx    # About us component
@@ -71,6 +77,9 @@ yamatecha.lt/
 │   │   ├── bekele/             # Off-road page
 │   │   │   ├── bekele.tsx
 │   │   │   └── bekele-specific.css
+│   │   ├── cart/               # Shopping cart page 
+│   │   │   ├── CartPage.tsx
+│   │   │   └── CartPage.module.css
 │   │   ├── daliu-katalogas/    # Parts catalog page
 │   │   │   ├── daliu-katalogas.tsx
 │   │   │   └── daliu-katalogas.css
@@ -83,19 +92,27 @@ yamatecha.lt/
 │   │   ├── kontaktai/          # Contact page
 │   │   │   ├── kontaktai.tsx
 │   │   │   └── kontaktai.css
+│   │   ├── musu_modeliai/      # Our models section
+│   │   │   ├── el-dviraciai/   # Electric bikes
+│   │   │   └── vandens_motociklai/ # Water vehicles
 │   │   ├── priedai-aksesuarai/  # Accessories page
 │   │   │   ├── priedai-aksesuarai.tsx
 │   │   │   └── priedai-aksesuarai.css
+│   │   ├── product/            # Product detail page 
+│   │   │   ├── ProductDetail.tsx
+│   │   │   └── ProductDetail.module.css
 │   │   ├── servisas/           # Service page
 │   │   │   ├── servisas.tsx    # Service component
 │   │   │   └── servisas.css    # Service styles
-│   │   ├── shop/               # E-commerce shop page
+│   │   ├── shop/               # E-commerce shop page 
 │   │   │   └── ShopPage.tsx
 │   │   ├── vanduo/             # Water vehicles page
 │   │   │   ├── vanduo.tsx
 │   │   │   └── vanduo-specific.css
 │   │   └── global-page-styles/ # Shared page styles
 │   │       └── page-styles.css
+│   ├── contexts/                # React Context providers 
+│   │   └── CartContext.tsx     # Shopping cart state management
 │   ├── lib/                    # Utility libraries
 │   │   └── shopify.ts          # Shopify API integration
 │   ├── i18n/                   # Internationalization config
@@ -149,7 +166,9 @@ yamatecha.lt/
 - **Water Vehicles** (`/vanduo`) - Watercraft and marine equipment
 - **Accessories** (`/priedai-aksesuarai`) - Accessories and gear
 - **Contact** (`/kontaktai`) - Contact information and form
-- **Shop** (`/shop`) - E-commerce shopping interface
+- **Shop** (`/shop`) - E-commerce shopping interface with filtering and search 
+- **Product Detail** (`/product/:handle`) - Individual product pages with add to cart 
+- **Shopping Cart** (`/cart`) - Full cart management and checkout 
 
 ## Development Workflow
 
@@ -171,22 +190,32 @@ npm run test:ui      # Run tests with UI
 ## Architecture Decisions
 
 ### CSS Architecture
-- **Modular CSS Structure** - Separate CSS files for each component/page
+- **Mixed Styling Approaches** - Global CSS + CSS Modules + TailwindCSS
 - **CSS Variables** - Centralized in `index.css` for consistent theming
-- **Component-Scoped Styles** - Each component imports its own CSS file
+- **Component-Scoped Styles** - CSS Modules for cart, product, and carousel components
 - **Shared Components** - Common styles in `shared-components.css`
-- **Legacy Components** - Remaining component styles in `legacy-components.css`
 - **Global Styles** - Minimal global styles in `App-global.css`
 - **Page-Specific Styles** - Individual CSS files for each page route
 - **Global Page Styles** - Shared page styles in `page-styles.css`
+- **CSS Modules Usage**:
+  - `ProductCard.module.css` - Product display component
+  - `CartIcon.module.css` - Cart icon component
+  - `CartPage.module.css` - Shopping cart page
+  - `ProductDetail.module.css` - Product detail page
+  - `Carousel3D.module.css` - 3D carousel component
+  - `navbar.module.css` - Navigation component
+  - `MegaMenu.module.css` - Mega menu component
 
 ### Component Architecture
 - **Functional Components** with React Hooks
+- **React Context** for global state management (CartContext)
 - **Lazy Loading** for images and videos
 - **Separation of Concerns** between UI and logic
 - **Reusable Components** for consistent design
 - **3D Carousel** for enhanced product presentation
 - **Shop Components** for e-commerce functionality
+- **Cart Components** for shopping cart management (NEW)
+- **Layout Components** for organized page structure (NEW)
 - **Language Switcher** for internationalization
 
 ### Performance Optimizations
@@ -195,14 +224,19 @@ npm run test:ui      # Run tests with UI
 - **Video Optimization** with LazyVideo component
 - **Build Optimization** with Vite
 - **Scroll Restoration** with ScrollToTop component
+- **Context-based State** for efficient cart management (NEW)
 
 ### E-commerce Integration
 - **Shopify Storefront API** for product management
 - **Mock Data System** for development without live store
+- **Shopping Cart** with full CRUD operations (NEW)
 - **Product Cards** with quick view and add to cart functionality
+- **Product Detail Pages** with image galleries and variants (NEW)
 - **Product Filtering** by type, tags, and search
 - **Price Display** with currency support
 - **Inventory Tracking** with availability status
+- **Checkout Integration** with Shopify checkout URLs (NEW)
+- **Cart Persistence** with localStorage (NEW)
 
 ### Internationalization
 - **Namespace-based** translations
@@ -213,11 +247,12 @@ npm run test:ui      # Run tests with UI
 ## Future Enhancements
 
 ### Planned Features
-1. **E-commerce Integration**
-   - Shopping cart functionality
-   - Payment gateway integration
-   - Product catalog management
-   - User authentication
+1. **Advanced E-commerce Features**
+   - User authentication and accounts
+   - Order history and tracking
+   - Wishlists and saved products
+   - Product reviews and ratings
+   - Advanced product search with filters
 
 2. **Service Booking System**
    - Advanced scheduling
@@ -227,9 +262,9 @@ npm run test:ui      # Run tests with UI
 
 3. **Content Management**
    - Blog/news section
-   - Product reviews
    - Customer testimonials
    - FAQ system
+   - Product comparison tools
 
 4. **Performance & SEO**
    - Server-side rendering (SSR)
@@ -308,6 +343,17 @@ npm run test:ui      # Run tests with UI
 ## Recent Updates
 
 ### March 2026
+- **Complete E-commerce Implementation** - Full shopping cart, product detail pages, and checkout integration
+- **CartContext State Management** - React Context for cart operations with localStorage persistence
+- **Product Detail Pages** - Individual product pages with image galleries, variants, and add to cart
+- **Shopping Cart Page** - Full cart management with quantity updates, item removal, and checkout
+- **Cart Icon Component** - Navigation cart indicator with item count badge
+- **Enhanced Shopify Integration** - Complete cart API operations (create, update, remove, checkout)
+- **CSS Modules Adoption** - Scoped styling for cart, product, and navigation components
+- **Updated Project Structure** - Organized components into layout, cart, and shop directories
+- **Enhanced Component Architecture** - React Context for global state management
+
+### February 2026
 - **Added Service Page** (`/servisas`) with comprehensive service booking system
 - **CSS Architecture Refactoring** - Moved from monolithic App.css to modular structure
 - **Component-specific CSS files** for better maintainability

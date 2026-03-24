@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import LanguageSwitcher from './language-switcher';
 import MegaMenu from './MegaMenu';
+import CartIcon from './cart/CartIcon';
 import styles from './navbar.module.css';
 
 interface NavbarProps {
   isMenuOpen: boolean
   setIsMenuOpen: (open: boolean) => void
-  // rest of the code remains the same
 }
 
 const Navbar = ({ isMenuOpen, setIsMenuOpen }: NavbarProps) => {
@@ -307,6 +307,9 @@ const Navbar = ({ isMenuOpen, setIsMenuOpen }: NavbarProps) => {
             />
             <li className={`nav-item language-nav-item desktop-only ${styles.languageNavItem}`}>
               <LanguageSwitcher />
+            </li>
+            <li className={`nav-item cart-nav-item desktop-only ${styles.cartNavItem}`}>
+              <CartIcon />
             </li>
           </ul>
 

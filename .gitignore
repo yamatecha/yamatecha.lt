@@ -24,7 +24,7 @@ dist-ssr
 *.sw?
 
 ARCHITECTURE_AUDIT.md
-blueprint.md
+#blueprint.md
 DONT_FORGET.md
 SHOPIFY_SETUP.md
 AppStyles.md
@@ -36,6 +36,7 @@ Implementation-Plan.md
 Implementation-Progress.md
 imageStorageOptimization.md
 ProductGrid-Cleanup-Report.md
+2026-03-24.md
 
 
 
